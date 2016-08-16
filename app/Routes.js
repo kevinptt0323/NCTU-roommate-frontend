@@ -11,6 +11,8 @@ class Routes extends React.Component {
         <Route path="/" component={App}>
           <IndexRoute component={Index} />
           <Route path="login" component={Login} />
+          <Route path="dorm" component={Login} />
+          <Route path="profile" component={Login} />
         </Route>
       </Router>
     );
