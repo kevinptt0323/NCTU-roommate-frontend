@@ -45,6 +45,7 @@ Login.contextTypes = {
   setToken: PropTypes.func.isRequired,
   onLogin: PropTypes.func.isRequired,
   server: PropTypes.func.isRequired,
+  config: PropTypes.object.isRequired
 };
 
 export default Login;
