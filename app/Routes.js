@@ -4,6 +4,9 @@ import App from './App';
 import Index from './pages/Index';
 import Login from './pages/Login';
 
+require('react-tap-event-plugin')();
+require('normalize-css');
+
 class Routes extends React.Component {
   render() {
     return (
