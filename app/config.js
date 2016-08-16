@@ -1,2 +1,4 @@
-const SERVER_HOST = 'http://localhost:8080';
-export { SERVER_HOST };
+const config = {
+  SERVER_HOST:'https://roommate.twmicrosheep.com'
+}
+export default config;

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Paper, RaisedButton } from 'material-ui';
-import D2login from '../components/Login/D2'
+import { FB as FBlogin, D2 as D2login } from '../components/Login'
 
 class Login extends React.Component {
   constructor(props, context) {
@@ -33,7 +33,8 @@ class Login extends React.Component {
             display: 'inline-block'
           }}
         >
-          <RaisedButton label="D2 登入" onTouchTap={D2login.bind(this)} />
+          <p><RaisedButton label="D2 登入" onTouchTap={D2login.bind(this)} /></p>
+          <p><RaisedButton label="Facebook 登入" onTouchTap={FBlogin.bind(this)} /></p>
         </Paper>
       </div>
     );

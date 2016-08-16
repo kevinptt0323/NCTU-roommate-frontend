@@ -1,5 +1,5 @@
 /* libraries */
-import React from 'react';
+import React, { PropTypes } from 'react';
 import prefix from 'superagent-prefix';
 
 /* material-ui */
@@ -11,7 +11,7 @@ import { indigo500 } from 'material-ui/styles/colors';
 /* custom components */
 import LeftNav from './components/LeftNav';
 
-import { SERVER_HOST } from './config';
+import config from './config';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -37,7 +37,8 @@ class App extends React.Component {
       getToken,
       login,
       onLogin,
-      server: prefix(SERVER_HOST),
+      config,
+      server: prefix(config.SERVER_HOST),
     };
   }
   onLeftIconButtonTouchTap() {
@@ -93,11 +94,12 @@ App.contextTypes = {
 };
 
 App.childContextTypes = {
-  setToken: React.PropTypes.func.isRequired,
-  getToken: React.PropTypes.func.isRequired,
-  login: React.PropTypes.func.isRequired,
-  onLogin: React.PropTypes.func.isRequired,
-  server: React.PropTypes.func.isRequired
+  setToken: PropTypes.func.isRequired,
+  getToken: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
+  config: PropTypes.object,
+  server: PropTypes.func.isRequired
 };
 
 export default App;
