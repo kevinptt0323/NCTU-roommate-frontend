@@ -9,9 +9,9 @@ class Login extends React.Component {
   componentWillMount() {
     let { token } = this.props.location.query;
     //token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjMsInR5cGUiOiJkMiIsInRpbWUiOjE0NzExODczMDR9.eEuetrdHPP-OE98OjJcUrvqPVawZrehLoZrMkJD-PPQ';
-    console.log(`token is ${token}`);
     if (token !== undefined) {
-      this.context.setToken(token, this.context.onLogin);
+      this.context.setToken(token);
+      this.context.onLogin();
     }
   }
   render() {
@@ -33,8 +33,8 @@ class Login extends React.Component {
             display: 'inline-block'
           }}
         >
-          <p><RaisedButton label="D2 登入" onTouchTap={D2login.bind(this)} /></p>
-          <p><RaisedButton label="Facebook 登入" onTouchTap={FBlogin.bind(this)} /></p>
+          <RaisedButton label="D2 登入" onTouchTap={D2login.bind(this)} /><br /><br />
+          <RaisedButton label="Facebook 登入" onTouchTap={FBlogin.bind(this)} />
         </Paper>
       </div>
     );

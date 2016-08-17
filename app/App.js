@@ -1,5 +1,6 @@
 /* libraries */
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import prefix from 'superagent-prefix';
 
 /* material-ui */
@@ -10,8 +11,9 @@ import { indigo500 } from 'material-ui/styles/colors';
 
 /* custom components */
 import LeftNav from './components/LeftNav';
-
 import config from './config';
+
+import * as actions from './actions';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -22,33 +24,25 @@ const muiTheme = getMuiTheme({
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { token: "" };
+    this.state = {};
 
     this.onLeftIconButtonTouchTap = this.onLeftIconButtonTouchTap.bind(this);
-    this.setToken = this.setToken.bind(this);
-    this.getToken = this.getToken.bind(this);
     this.login = this.login.bind(this);
     this.onLogin = this.onLogin.bind(this);
   }
   getChildContext() {
-    const { setToken, getToken, login, onLogin } = this;
+    const { props: { token }, login, onLogin } = this;
     return {
-      setToken,
-      getToken,
+      token,
       login,
       onLogin,
       config,
+      setToken: this.props.setToken,
       server: prefix(config.SERVER_HOST),
     };
   }
   onLeftIconButtonTouchTap() {
     this.refs.leftNav.handleToggle();
-  }
-  setToken(token, cb) {
-    this.setState({ token: token }, cb);
-  }
-  getToken() {
-    return this.state.token;
   }
   login() {
     const { pathname, query } = this.props.location;
@@ -57,7 +51,6 @@ class App extends React.Component {
   }
   onLogin() {
     const { beforeLogin: state = "/" } = this.state;
-    console.log(state);
     this.context.router.push(state);
   }
   render() {
@@ -90,16 +83,26 @@ class App extends React.Component {
 }
 
 App.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
 };
 
 App.childContextTypes = {
   setToken: PropTypes.func.isRequired,
-  getToken: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   onLogin: PropTypes.func.isRequired,
   config: PropTypes.object,
+  token: PropTypes.string,
   server: PropTypes.func.isRequired
 };
 
-export default App;
+const mapStateToProps = state => ({
+  token: state.auth.token,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setToken: token => {
+    dispatch(actions.setToken(token));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

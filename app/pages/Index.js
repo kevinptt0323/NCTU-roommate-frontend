@@ -5,24 +5,18 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentWillMount(nextProps, nextState) {
-    if (this.context.getToken()=="") {
-      this.context.login();
-    }
-  }
   render() {
     return (
       <div>
         Login only<br />
-        Your token is {this.context.getToken()}
+        Your token is {this.context.token}
       </div>
     );
   }
 }
 
 Index.contextTypes = {
-  getToken: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
+  token: PropTypes.string,
 };
 
 export default Index;
