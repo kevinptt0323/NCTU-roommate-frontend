@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import { Paper, RaisedButton } from 'material-ui';
 
 class Index extends React.Component {
@@ -8,8 +9,10 @@ class Index extends React.Component {
   render() {
     return (
       <div>
-        Login only<br />
-        Your token is {this.context.token}
+        <RaisedButton
+          primary={true}
+          containerElement={<Link to="/dorms" />}
+          label="開始找室友" />
       </div>
     );
   }

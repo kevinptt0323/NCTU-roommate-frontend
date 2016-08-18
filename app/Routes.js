@@ -5,6 +5,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import App from './App';
 import Index from './pages/Index';
 import Login from './pages/Login';
+import Dorm from './pages/Dorm';
 
 require('react-tap-event-plugin')();
 require('normalize-css');
@@ -26,7 +27,7 @@ const Routes = (props, context) => {
       <Route path="/" component={App}>
         <IndexRoute component={Index} onEnter={auth.loginRequired} />
         <Route path="login" component={Login} />
-        <Route path="dorm" component={Login} />
+        <Route path="dorms" component={Dorm} onEnter={auth.loginRequired} />
         <Route path="profile" component={Login} />
       </Route>
     </Router>

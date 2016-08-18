@@ -12,7 +12,6 @@ class Login extends React.Component {
     const { store } = this.context;
     const state = store.getState();
     let { token } = state.auth;
-    //token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjMsInR5cGUiOiJkMiIsInRpbWUiOjE0NzExODczMDR9.eEuetrdHPP-OE98OjJcUrvqPVawZrehLoZrMkJD-PPQ';
     if (!!token) {
       this.context.postLogin();
     } else {
