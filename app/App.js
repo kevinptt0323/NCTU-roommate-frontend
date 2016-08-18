@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import prefix from 'superagent-prefix';
+import { push } from 'react-router-redux';
 
 /* material-ui */
 import { AppBar } from 'material-ui';
@@ -28,14 +29,14 @@ class App extends React.Component {
 
     this.onLeftIconButtonTouchTap = this.onLeftIconButtonTouchTap.bind(this);
     this.login = this.login.bind(this);
-    this.onLogin = this.onLogin.bind(this);
+    this.postLogin = this.postLogin.bind(this);
   }
   getChildContext() {
-    const { props: { token }, login, onLogin } = this;
+    const { props: { token }, login, postLogin } = this;
     return {
       token,
       login,
-      onLogin,
+      postLogin,
       config,
       setToken: this.props.setToken,
       server: prefix(config.SERVER_HOST),
@@ -45,13 +46,17 @@ class App extends React.Component {
     this.refs.leftNav.handleToggle();
   }
   login() {
-    const { pathname, query } = this.props.location;
-    this.setState({ beforeLogin: { pathname, query }});
-    this.context.router.push('/login');
+    const { store } = this.context;
+    store.dispatch(actions.setHistoryPath(this.props.prevLocation));
+    store.dispatch(push('/login'));
   }
-  onLogin() {
-    const { beforeLogin: state = "/" } = this.state;
-    this.context.router.push(state);
+  postLogin() {
+    const { store } = this.context;
+    if (this.props.prevLocation.pathname == "/login") {
+      store.dispatch(push('/'));
+    } else {
+      store.dispatch(push(this.props.prevLocation));
+    }
   }
   render() {
     return (
@@ -83,13 +88,14 @@ class App extends React.Component {
 }
 
 App.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 };
 
 App.childContextTypes = {
   setToken: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  onLogin: PropTypes.func.isRequired,
+  postLogin: PropTypes.func.isRequired,
   config: PropTypes.object,
   token: PropTypes.string,
   server: PropTypes.func.isRequired
@@ -97,6 +103,7 @@ App.childContextTypes = {
 
 const mapStateToProps = state => ({
   token: state.auth.token,
+  prevLocation: state.routing.locationBeforeTransitions
 });
 
 const mapDispatchToProps = dispatch => ({

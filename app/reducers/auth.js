@@ -1,4 +1,4 @@
-const initialState = { token: "default" };
+const initialState = { token: "" };
 const authReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'SET_TOKEN':

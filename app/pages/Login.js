@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
+
 import { Paper, RaisedButton } from 'material-ui';
+
 import { FB as FBlogin, D2 as D2login } from '../components/Login'
 
 class Login extends React.Component {
@@ -7,11 +9,19 @@ class Login extends React.Component {
     super(props);
   }
   componentWillMount() {
-    let { token } = this.props.location.query;
+    const { store } = this.context;
+    const state = store.getState();
+    let { token } = state.auth;
     //token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjMsInR5cGUiOiJkMiIsInRpbWUiOjE0NzExODczMDR9.eEuetrdHPP-OE98OjJcUrvqPVawZrehLoZrMkJD-PPQ';
-    if (token !== undefined) {
-      this.context.setToken(token);
-      this.context.onLogin();
+    if (!!token) {
+      this.context.postLogin();
+    } else {
+      const { pathname, query } = state.routing.locationBeforeTransitions;
+      token = query.token
+      if (token !== undefined) {
+        this.context.setToken(token);
+        this.context.postLogin();
+      }
     }
   }
   render() {
@@ -43,9 +53,10 @@ class Login extends React.Component {
 
 Login.contextTypes = {
   setToken: PropTypes.func.isRequired,
-  onLogin: PropTypes.func.isRequired,
+  postLogin: PropTypes.func.isRequired,
   server: PropTypes.func.isRequired,
-  config: PropTypes.object.isRequired
+  config: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 };
 
 export default Login;
