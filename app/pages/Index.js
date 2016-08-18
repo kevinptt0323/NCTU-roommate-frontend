@@ -5,11 +5,6 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    if (!this.context.token) {
-      this.context.login();
-    }
-  }
   render() {
     return (
       <div>
@@ -21,6 +16,7 @@ class Index extends React.Component {
 }
 
 Index.contextTypes = {
+  store: PropTypes.object.isRequired,
   token: PropTypes.string,
   login: PropTypes.func.isRequired
 };

@@ -9,12 +9,22 @@ import Login from './pages/Login';
 require('react-tap-event-plugin')();
 require('normalize-css');
 
+
 const Routes = (props, context) => {
-  const historyStore = syncHistoryWithStore(hashHistory, context.store);
+  const { store } = context;
+  const historyStore = syncHistoryWithStore(hashHistory, store);
+  const auth = {
+    loginRequired: (nextState, replace) => {
+      if (!store.getState().auth.token) {
+        replace('/login');
+      }
+    }
+  };
+  console.log("GG");
   return (
     <Router history={historyStore}>
       <Route path="/" component={App}>
-        <IndexRoute component={Index} />
+        <IndexRoute component={Index} onEnter={auth.loginRequired} />
         <Route path="login" component={Login} />
         <Route path="dorm" component={Login} />
         <Route path="profile" component={Login} />
