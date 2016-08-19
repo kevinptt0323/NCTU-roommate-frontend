@@ -6,6 +6,7 @@ import App from './App';
 import Index from './pages/Index';
 import Login from './pages/Login';
 import Dorm from './pages/Dorm';
+import Profile from './pages/Profile';
 
 require('react-tap-event-plugin')();
 require('normalize-css');
@@ -28,7 +29,7 @@ const Routes = (props, context) => {
         <IndexRoute component={Index} onEnter={auth.loginRequired} />
         <Route path="login" component={Login} />
         <Route path="dorms" component={Dorm} onEnter={auth.loginRequired} />
-        <Route path="profile" component={Login} />
+        <Route path="profile" component={Profile} onEnter={auth.loginRequired} />
       </Route>
     </Router>
   );
