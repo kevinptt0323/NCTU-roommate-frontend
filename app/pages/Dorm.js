@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Paper, RaisedButton } from 'material-ui';
+import { Paper, Tabs, Tab, RaisedButton } from 'material-ui';
 
 class Dorm extends React.Component {
   constructor(props) {
@@ -7,10 +7,31 @@ class Dorm extends React.Component {
   }
   render() {
     const { store } = this.context;
+    const styles = {
+      headline: {
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 400,
+      },
+    };
     return (
       <div>
-        Login only<br />
-        Your token is {store.getState().auth.token}
+        <Tabs>
+          <Tab label="Token">
+            <div>
+              Token is {store.getState().auth.token}
+            </div>
+          </Tab>
+          <Tab label="Item Two" >
+            <div>
+              <h2 style={styles.headline}>Tab Two</h2>
+              <p>
+                This is another example tab.
+              </p>
+            </div>
+          </Tab>
+        </Tabs>
       </div>
     );
   }
