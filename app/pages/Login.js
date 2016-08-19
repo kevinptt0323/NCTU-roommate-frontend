@@ -1,8 +1,5 @@
 import React, { PropTypes } from 'react';
-
 import { Paper, RaisedButton } from 'material-ui';
-
-import { FB as FBlogin, D2 as D2login } from '../components/Login'
 
 class Login extends React.Component {
   constructor(props, context) {
