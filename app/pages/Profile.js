@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
-import { Paper, RaisedButton } from 'material-ui';
+import { } from 'material-ui';
+
+import { ProfileEditor } from '../components/Profile';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -7,17 +9,9 @@ class Profile extends React.Component {
   }
   render() {
     const { store } = this.context;
-    const styles = {
-      headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
-        fontWeight: 400,
-      },
-    };
     return (
       <div>
-        Profiles
+        <ProfileEditor />
       </div>
     );
   }

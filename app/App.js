@@ -64,7 +64,7 @@ class App extends React.Component {
         <div style={{width: '100vw', height: '100vh'}}>
           <AppBar
             onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap}
-            style={{ position: 'fixed' }}
+            style={{ position: 'fixed', top: 0 }}
             title="Hello, world!"
           />
           <LeftNav ref="leftNav" />
