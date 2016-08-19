@@ -42,8 +42,8 @@ class Login extends React.Component {
             display: 'inline-block'
           }}
         >
-          <RaisedButton label="D2 登入" onTouchTap={D2login.bind(this)} /><br /><br />
-          <RaisedButton label="Facebook 登入" onTouchTap={FBlogin.bind(this)} />
+          <RaisedButton label="D2 登入" href={`${this.context.config.SERVER_HOST}/d2login/`} /><br /><br />
+          <RaisedButton label="Facebook 登入" href={`${this.context.config.SERVER_HOST}/fblogin/`} />
         </Paper>
       </div>
     );
