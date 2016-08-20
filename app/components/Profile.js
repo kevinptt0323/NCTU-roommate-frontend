@@ -1,6 +1,14 @@
 import React, { PropTypes } from 'react';
 import update from 'react-addons-update';
-import { Paper, RaisedButton, FlatButton, SelectField, MenuItem, TextField } from 'material-ui';
+import {
+  Paper,
+  RaisedButton,
+  Divider,
+  FlatButton,
+  SelectField,
+  MenuItem,
+  TextField
+} from 'material-ui';
 import deepEqual from 'deep-equal';
 
 import { sendAjax } from '../actions/api';
@@ -13,7 +21,7 @@ const errorMessage = {
 const formStyle = {
   maxWidth: 600,
   margin: '50px auto',
-  padding: '0 25px 25px'
+  paddingBottom: 25
 };
 
 const departments = [
@@ -30,6 +38,15 @@ class ProfileEditor extends React.Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.submit = this.submit.bind(this);
+
+    this.textInputProps = {
+      onChange: this.handleTextChange,
+      underlineShow: false,
+      style: {
+        width: 'calc(100% - 40px)',
+        marginLeft: 20,
+      },
+    };
   }
   validate(keys, onSuccess, onFailure) {
     const { formData } = this.state;
@@ -96,21 +113,21 @@ class ProfileEditor extends React.Component {
       <ProgressPaper style={formStyle} loading={profile.sending}>
         <div>
           <TextField
-            fullWidth={true}
+            {...this.textInputProps}
             value={formData.student_name}
-            onChange={this.handleTextChange}
             errorText={errorText.student_name}
             name="student_name"
             floatingLabelText="姓名 (非公開)" />
+          <Divider />
           <TextField
-            fullWidth={true}
+            {...this.textInputProps}
             value={formData.student_nickname}
-            onChange={this.handleTextChange}
             errorText={errorText.student_nickname}
             name="student_nickname"
             floatingLabelText="暱稱" />
+          <Divider />
           <SelectField
-            fullWidth={true}
+            {...this.textInputProps}
             maxHeight={200}
             value={formData.class_id}
             onChange={this.handleSelectChange}
@@ -120,50 +137,51 @@ class ProfileEditor extends React.Component {
           >
             {departments}
           </SelectField>
+          <Divider />
           <TextField
-            fullWidth={true}
+            {...this.textInputProps}
             value={formData.student_id}
-            onChange={this.handleTextChange}
             errorText={errorText.student_id}
             name="student_id"
             floatingLabelText="學號" />
+          <Divider />
           <TextField
-            fullWidth={true}
+            {...this.textInputProps}
             value={formData.room_id}
-            onChange={this.handleTextChange}
             errorText={errorText.room_id}
             name="room_id"
             floatingLabelText="房間" />
+          <Divider />
           <TextField
-            fullWidth={true}
+            {...this.textInputProps}
             value={formData.email}
-            onChange={this.handleTextChange}
             errorText={errorText.email}
             name="email"
             floatingLabelText="e-mail" />
+          <Divider />
           <TextField
-            fullWidth={true}
+            {...this.textInputProps}
             value={formData.facebook_id}
-            onChange={this.handleTextChange}
             errorText={errorText.facebook_id}
             name="facebook_id"
             floatingLabelText="facebook" />
+          <Divider />
           <TextField
-            fullWidth={true}
+            {...this.textInputProps}
             value={formData.slogan}
-            onChange={this.handleTextChange}
             errorText={errorText.slogan}
             name="slogan"
             floatingLabelText="標語" />
+          <Divider />
           <TextField
-            fullWidth={true}
+            {...this.textInputProps}
             multiLine={true}
             rows={2}
             value={formData.detail}
-            onChange={this.handleTextChange}
             errorText={errorText.detail}
             name="detail"
             floatingLabelText="自我介紹" />
+          <Divider />
           <div style={{ textAlign: 'center', marginTop: 20 }}>
             <RaisedButton primary={true} label="儲存" onTouchTap={this.submit} />
           </div>
