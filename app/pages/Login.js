@@ -8,16 +8,14 @@ class Login extends React.Component {
   componentWillMount() {
     const { store } = this.context;
     const state = store.getState();
-    let { token } = state.auth;
-    if (!!token) {
+
+    const { pathname, query } = state.routing.locationBeforeTransitions;
+    let token = query.token
+    if (token !== undefined) {
+      this.context.setToken(token);
       this.context.postLogin();
-    } else {
-      const { pathname, query } = state.routing.locationBeforeTransitions;
-      token = query.token
-      if (token !== undefined) {
-        this.context.setToken(token);
-        this.context.postLogin();
-      }
+    } else if (!!state.token) {
+      this.context.postLogin();
     }
   }
   render() {
