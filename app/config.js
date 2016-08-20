@@ -1,4 +1,1 @@
-const config = {
-  SERVER_HOST: 'https://roommate.twmicrosheep.com'
-}
-export default config;
+export const SERVER_HOST = 'https://roommate.twmicrosheep.com';

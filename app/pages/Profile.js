@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { } from 'material-ui';
 
 import { ProfileEditor } from '../components/Profile';
 

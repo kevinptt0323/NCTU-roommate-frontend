@@ -12,7 +12,7 @@ import { indigo500 } from 'material-ui/styles/colors';
 
 /* custom components */
 import LeftNav from './components/LeftNav';
-import config from './config';
+import * as config from './config';
 
 import * as actions from './actions';
 
@@ -39,6 +39,7 @@ class App extends React.Component {
       postLogin,
       config,
       setToken: this.props.setToken,
+      profile: this.props.profile,
       server: prefix(config.SERVER_HOST),
     };
   }
@@ -98,11 +99,13 @@ App.childContextTypes = {
   postLogin: PropTypes.func.isRequired,
   config: PropTypes.object,
   token: PropTypes.string,
-  server: PropTypes.func.isRequired
+  server: PropTypes.func.isRequired,
+  profile: PropTypes.object
 };
 
 const mapStateToProps = state => ({
   token: state.auth.token,
+  profile: state.profile,
   prevLocation: state.routing.locationBeforeTransitions
 });
 

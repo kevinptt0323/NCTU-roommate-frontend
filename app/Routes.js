@@ -17,12 +17,12 @@ const Routes = (props, context) => {
   const historyStore = syncHistoryWithStore(hashHistory, store);
   const auth = {
     loginRequired: (nextState, replace) => {
+      return;
       if (!store.getState().auth.token) {
         replace('/login');
       }
     }
   };
-  console.log("GG");
   return (
     <Router history={historyStore}>
       <Route path="/" component={App}>
