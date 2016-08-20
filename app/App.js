@@ -14,6 +14,7 @@ import { indigo500 } from 'material-ui/styles/colors';
 import LeftNav from './components/LeftNav';
 import * as config from './config';
 
+import { sendAjax } from './actions/api';
 import * as actions from './actions';
 
 const muiTheme = getMuiTheme({
@@ -53,6 +54,14 @@ class App extends React.Component {
   }
   postLogin() {
     const { store } = this.context;
+    store.dispatch(sendAjax({
+      method: 'get',
+      path: '/user/myinfo/',
+      withToken: true,
+      sendingType: 'GET_PROFILE',
+      successType: 'GET_PROFILE_DONE',
+      failureType: 'GET_PROFILE_ERROR'
+    }));
     if (this.props.prevLocation.pathname == "/login") {
       store.dispatch(push('/'));
     } else {

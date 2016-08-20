@@ -30,15 +30,6 @@ class ProfileEditor extends React.Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.submit = this.submit.bind(this);
-
-    context.store.dispatch(sendAjax({
-      method: 'get',
-      path: '/user/myinfo/',
-      withToken: true,
-      sendingType: 'GET_PROFILE',
-      successType: 'GET_PROFILE_DONE',
-      failureType: 'GET_PROFILE_ERROR'
-    }));
   }
   validate(keys, onSuccess, onFailure) {
     const { formData } = this.state;
