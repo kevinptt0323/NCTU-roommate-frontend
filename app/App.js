@@ -32,6 +32,8 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.postLogin = this.postLogin.bind(this);
     this.loadProfile = this.loadProfile.bind(this);
+    this.loadClasses = this.loadClasses.bind(this);
+    this.loadBuildings = this.loadBuildings.bind(this);
   }
   getChildContext() {
     const { props: { token }, login, loadProfile, postLogin } = this;
@@ -73,9 +75,41 @@ class App extends React.Component {
       });
     });
   }
+  loadClasses() {
+    const { store } = this.context;
+    store.dispatch(sendAjax({
+      method: 'get',
+      path: '/class/list/',
+      withToken: true,
+      sendingType: 'GET_CLASSES'
+    })).then(({body}) => {
+      store.dispatch({
+        type: 'GET_CLASSES_DONE',
+        response: body
+      });
+    }).catch(error => {
+    });
+  }
+  loadBuildings() {
+    const { store } = this.context;
+    store.dispatch(sendAjax({
+      method: 'get',
+      path: '/building/list/',
+      withToken: true,
+      sendingType: 'GET_BUILDINGS'
+    })).then(({body}) => {
+      store.dispatch({
+        type: 'GET_BUILDINGS_DONE',
+        response: body
+      });
+    }).catch(error => {
+    });
+  }
   postLogin() {
     const { store } = this.context;
     this.loadProfile();
+    this.loadClasses();
+    this.loadBuildings();
     if (this.props.prevLocation.pathname == "/login") {
       store.dispatch(push('/'));
     } else {
