@@ -5,6 +5,7 @@ import {
   RaisedButton,
   Divider,
   FlatButton,
+  List, ListItem,
   SelectField,
   MenuItem,
   TextField
@@ -14,15 +15,36 @@ import deepEqual from 'deep-equal';
 import { sendAjax } from '../actions/api';
 import ProgressPaper from '../components/ProgressPaper';
 
+const formDataKeys = ['student_name', 'student_nickname', 'class_id', 'student_id', 'room_id', 'email', 'facebook_id', 'slogan', 'detail'];
+
 const errorMessage = {
   cantBeEmpty: "不可為空白"
 };
 
-const formStyle = {
+const strings = {
+  profile: {
+    student_name: '姓名',
+    student_nickname: '暱稱',
+    class_id: '科系',
+    student_id: '學號',
+    room_id: '房間',
+    email: 'email',
+    facebook_id: 'facebook',
+    slogan: '標語',
+    detail: '自我介紹',
+  }
+};
+
+const editorStyle = {
   maxWidth: 600,
   margin: '50px auto',
   paddingBottom: 25
 };
+
+const viewerStyle = {
+  maxWidth: 600,
+  margin: '50px auto',
+}
 
 const departments = [
   '資訊工程學系',
@@ -34,13 +56,14 @@ class ProfileEditor extends React.Component {
     super(props);
     this.state = { formData: {}, errorText: {}, modified: false };
 
-    this.formDataKeys = ['student_name', 'student_nickname', 'class_id', 'student_id', 'room_id', 'email', 'facebook_id', 'slogan', 'detail'];
+    this.handleFocus = this.handleFocus.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.submit = this.submit.bind(this);
 
     this.textInputProps = {
       onChange: this.handleTextChange,
+      readonly: true,
       underlineShow: false,
       style: {
         width: 'calc(100% - 40px)',
@@ -66,7 +89,7 @@ class ProfileEditor extends React.Component {
   submit() {
     let data = {...this.context.profile.data, ...this.state.formData};
     this.setState({ formData: data, modified: true }, () => {
-      this.validate(this.formDataKeys, () => {
+      this.validate(formDataKeys, () => {
         this.context.store.dispatch(sendAjax({
           method: 'patch',
           path: '/user/myinfo/modify/',
@@ -77,6 +100,12 @@ class ProfileEditor extends React.Component {
         }));
       })
     });
+  }
+  handleFocus(e) {
+    console.log("touch");
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
   }
   handleTextChange(e) {
     const { name: key, value } = e.target;
@@ -109,79 +138,41 @@ class ProfileEditor extends React.Component {
     if (!modified) {
       formData = profile.data || {};
     }
+    const textFields = formDataKeys
+      .map((key) => {
+        const props = {
+          ...this.textInputProps,
+          key,
+          onChange: this.handleSelectChange,
+          value: formData[key],
+          errorText: errorText[key],
+          name: key,
+          floatingLabelText: strings.profile[key]
+        };
+        switch (key) {
+          case 'class_id':
+            return (
+              <SelectField {...props} maxHeight={200}>
+                {departments}
+              </SelectField>
+            );
+          case 'detail':
+            return (
+              <TextField {...props} multiLine={true} rows={2} />
+            );
+          default:
+            return (
+              <TextField {...props} />
+            );
+        }
+      })
+      .reduce((prev, curr, index) => (
+        !!prev ? [...prev, <Divider key={`divider-${index}`} />, curr] : [curr]
+      ), null);
     return (
-      <ProgressPaper style={formStyle} loading={profile.sending}>
+      <ProgressPaper style={editorStyle} loading={profile.sending}>
         <div>
-          <TextField
-            {...this.textInputProps}
-            value={formData.student_name}
-            errorText={errorText.student_name}
-            name="student_name"
-            floatingLabelText="姓名 (非公開)" />
-          <Divider />
-          <TextField
-            {...this.textInputProps}
-            value={formData.student_nickname}
-            errorText={errorText.student_nickname}
-            name="student_nickname"
-            floatingLabelText="暱稱" />
-          <Divider />
-          <SelectField
-            {...this.textInputProps}
-            maxHeight={200}
-            value={formData.class_id}
-            onChange={this.handleSelectChange}
-            errorText={errorText.class_id}
-            name="class_id"
-            floatingLabelText="學系"
-          >
-            {departments}
-          </SelectField>
-          <Divider />
-          <TextField
-            {...this.textInputProps}
-            value={formData.student_id}
-            errorText={errorText.student_id}
-            name="student_id"
-            floatingLabelText="學號" />
-          <Divider />
-          <TextField
-            {...this.textInputProps}
-            value={formData.room_id}
-            errorText={errorText.room_id}
-            name="room_id"
-            floatingLabelText="房間" />
-          <Divider />
-          <TextField
-            {...this.textInputProps}
-            value={formData.email}
-            errorText={errorText.email}
-            name="email"
-            floatingLabelText="e-mail" />
-          <Divider />
-          <TextField
-            {...this.textInputProps}
-            value={formData.facebook_id}
-            errorText={errorText.facebook_id}
-            name="facebook_id"
-            floatingLabelText="facebook" />
-          <Divider />
-          <TextField
-            {...this.textInputProps}
-            value={formData.slogan}
-            errorText={errorText.slogan}
-            name="slogan"
-            floatingLabelText="標語" />
-          <Divider />
-          <TextField
-            {...this.textInputProps}
-            multiLine={true}
-            rows={2}
-            value={formData.detail}
-            errorText={errorText.detail}
-            name="detail"
-            floatingLabelText="自我介紹" />
-          <Divider />
+          { textFields }
           <div style={{ textAlign: 'center', marginTop: 20 }}>
             <RaisedButton primary={true} label="儲存" onTouchTap={this.submit} />
           </div>
@@ -196,4 +187,23 @@ ProfileEditor.contextTypes = {
   profile: React.PropTypes.object,
 };
 
-export { ProfileEditor };
+const ProfileViewer = (props, context) => {
+  const { profile = {} } = props;
+  const profileList = formDataKeys
+    .filter(key => !!profile[key])
+    .map((key,index) => (
+      <ListItem key={index} primaryText={strings.profile[key]} secondaryText={profile[key]} />
+    ))
+    .reduce((prev, curr) => (
+      !!prev ? [...prev, <Divider />, curr] : [curr]
+    ), null);
+  return (
+    <ProgressPaper style={viewerStyle}>
+      <List>
+        { profileList }
+      </List>
+    </ProgressPaper>
+   )
+};
+
+export { ProfileEditor, ProfileViewer };
