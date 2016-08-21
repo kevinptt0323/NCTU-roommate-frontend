@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import update from 'react-addons-update';
 import {
-  Paper,
   RaisedButton,
   Divider,
   FlatButton,
@@ -10,6 +10,9 @@ import {
   MenuItem,
   TextField
 } from 'material-ui';
+import IconButton from 'material-ui/IconButton';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+import { grey100, grey700 } from 'material-ui/styles/colors';
 import deepEqual from 'deep-equal';
 
 import { sendAjax } from '../actions/api';
@@ -187,11 +190,15 @@ ProfileEditor.contextTypes = {
 };
 
 const ProfileViewer = (props, context) => {
-  const { profile = {} } = props;
+  const { profile = {}, editable = false } = props;
   const profileList = formDataKeys
     .filter(key => !!profile[key])
-    .map((key,index) => (
-      <ListItem key={index} primaryText={strings.profile[key]} secondaryText={profile[key]} />
+    .map((key, index) => (
+      <ListItem
+        key={index}
+        primaryText={strings.profile[key]}
+        secondaryText={profile[key]}
+      />
     ))
     .reduce((prev, curr, index) => (
       !!prev ? [...prev, <Divider key={`divider-${index}`} />, curr] : [curr]
@@ -204,5 +211,15 @@ const ProfileViewer = (props, context) => {
     </ProgressPaper>
    )
 };
+const EditButton = () => (
+  <IconButton
+    containerElement={<Link to="/user/myinfo/modify" />}
+    touch={true}
+    tooltip="編輯"
+    tooltipPosition="bottom-left"
+  >
+    <EditIcon color={grey100} />
+  </IconButton>
+);
 
-export { ProfileEditor, ProfileViewer };
+export { ProfileEditor, ProfileViewer, EditButton };
