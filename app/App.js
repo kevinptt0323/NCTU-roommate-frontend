@@ -31,14 +31,16 @@ class App extends React.Component {
     this.onLeftIconButtonTouchTap = this.onLeftIconButtonTouchTap.bind(this);
     this.login = this.login.bind(this);
     this.postLogin = this.postLogin.bind(this);
+    this.loadProfile = this.loadProfile.bind(this);
   }
   getChildContext() {
-    const { props: { token }, login, postLogin } = this;
+    const { props: { token }, login, loadProfile, postLogin } = this;
     return {
       token,
       login,
       postLogin,
       config,
+      loadProfile,
       setToken: this.props.setToken,
       profile: this.props.profile,
       server: prefix(config.SERVER_HOST),
@@ -52,22 +54,28 @@ class App extends React.Component {
     store.dispatch(actions.setHistoryPath(this.props.prevLocation));
     store.dispatch(push('/login'));
   }
-  postLogin() {
+  loadProfile() {
     const { store } = this.context;
     store.dispatch(sendAjax({
       method: 'get',
       path: '/user/myinfo/',
       withToken: true,
       sendingType: 'GET_PROFILE',
-      failureType: 'GET_PROFILE_ERROR'
     })).then(({body}) => {
       store.dispatch({
         type: 'GET_PROFILE_DONE',
         response: body
-      })
+      });
     }).catch(error => {
-      console.log(error);
+      store.dispatch({
+        type: 'GET_PROFILE_ERROR',
+        response: error
+      });
     });
+  }
+  postLogin() {
+    const { store } = this.context;
+    this.loadProfile();
     if (this.props.prevLocation.pathname == "/login") {
       store.dispatch(push('/'));
     } else {
@@ -108,6 +116,7 @@ App.contextTypes = {
 App.childContextTypes = {
   setToken: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  loadProfile: PropTypes.func.isRequired,
   postLogin: PropTypes.func.isRequired,
   config: PropTypes.object,
   token: PropTypes.string,

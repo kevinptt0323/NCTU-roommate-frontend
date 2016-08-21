@@ -2,11 +2,9 @@ import React, { PropTypes } from 'react';
 
 import { ProfileEditor, ProfileViewer } from '../components/Profile';
 
-const View = (props, {store, ...context}) => {
-  return (
-    <ProfileViewer profile={store.getState().profile.data} />
-  );
-};
+const View = (props, {store, ...context}) => (
+  <ProfileViewer profile={store.getState().profile.data} />
+);
 View.contextTypes = {
   store: React.PropTypes.object.isRequired
 };

@@ -17,8 +17,11 @@ export const sendAjax = ({withToken = false, ...options}) => (dispatch, getState
 
   let req = request[method](path)
     .use(server)
-    .query(query)
-    .send(body);
+    .query(query);
+
+  if (!!body) {
+    req = req.send(body).set('Content-Type', 'application/json');
+  }
 
   return req;
 };

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import update from 'react-addons-update';
+import { push } from 'react-router-redux';
 import {
   RaisedButton,
   Divider,
@@ -88,17 +89,26 @@ class ProfileEditor extends React.Component {
     this.setState({ errorText }, failure ? onFailure : onSuccess);
   }
   submit() {
-    let data = {...this.context.profile.data, ...this.state.formData};
+    const { store, dispatch, profile, loadProfile } = this.context;
+    let data = {...profile.data, ...this.state.formData};
     this.setState({ formData: data, modified: true }, () => {
       this.validate(formDataKeys, () => {
-        this.context.store.dispatch(sendAjax({
+        store.dispatch(sendAjax({
           method: 'patch',
           path: '/user/myinfo/modify/',
           withToken: true,
+          body: this.state.formData,
           sendingType: 'SEND_PROFILE',
-          successType: 'SEND_PROFILE_DONE',
           failureType: 'SEND_PROFILE_ERROR'
-        }));
+        })).then(() => {
+          loadProfile();
+          store.dispatch(push('/user/myinfo'));
+        }).catch(error => {
+          store.dispatch({
+            type: 'GET_PROFILE_ERROR',
+            response: error
+          });
+        });
       })
     });
   }
@@ -179,8 +189,9 @@ class ProfileEditor extends React.Component {
 }
 
 ProfileEditor.contextTypes = {
-  store: React.PropTypes.object.isRequired,
-  profile: React.PropTypes.object,
+  store: PropTypes.object.isRequired,
+  profile: PropTypes.object,
+  loadProfile: PropTypes.func.isRequired
 };
 
 const ProfileViewer = (props, context) => {

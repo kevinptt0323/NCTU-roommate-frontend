@@ -4,7 +4,7 @@ const profileReducer = (state = initialState, action) => {
     case 'GET_PROFILE':
       return {
         sending: true,
-        data: null,
+        data: {},
         error: null,
       };
     case 'GET_PROFILE_DONE':
@@ -16,7 +16,7 @@ const profileReducer = (state = initialState, action) => {
     case 'GET_PROFILE_ERROR':
       return {
         sending: false,
-        data: null,
+        data: {},
         error: action.response,
       };
     default:
