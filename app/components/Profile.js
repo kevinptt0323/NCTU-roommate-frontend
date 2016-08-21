@@ -59,7 +59,6 @@ class ProfileEditor extends React.Component {
     super(props);
     this.state = { formData: {}, errorText: {}, modified: false };
 
-    this.handleFocus = this.handleFocus.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.submit = this.submit.bind(this);
@@ -103,12 +102,6 @@ class ProfileEditor extends React.Component {
       })
     });
   }
-  handleFocus(e) {
-    console.log("touch");
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
-  }
   handleTextChange(e) {
     const { name: key, value } = e.target;
     let formData = this.state.formData;
@@ -145,7 +138,7 @@ class ProfileEditor extends React.Component {
         const props = {
           ...this.textInputProps,
           key,
-          onChange: this.handleSelectChange,
+          onChange: this.handleTextChange,
           value: formData[key],
           errorText: errorText[key],
           name: key,
@@ -154,7 +147,7 @@ class ProfileEditor extends React.Component {
         switch (key) {
           case 'class_id':
             return (
-              <SelectField {...props} maxHeight={200}>
+              <SelectField {...props} onChange={this.handleSelectChange} maxHeight={200}>
                 {departments}
               </SelectField>
             );
@@ -175,6 +168,7 @@ class ProfileEditor extends React.Component {
       <ProgressPaper style={editorStyle} loading={profile.sending}>
         <div>
           { textFields }
+          <Divider />
           <div style={{ textAlign: 'center', marginTop: 20 }}>
             <RaisedButton primary={true} label="儲存" onTouchTap={this.submit} />
           </div>
