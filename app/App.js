@@ -85,11 +85,7 @@ class App extends React.Component {
               top: '64px'
             }}
           >
-            {
-              React.cloneElement(
-                this.props.children,
-              )
-            }
+            {this.props.children}
           </div>
         </div>
       </MuiThemeProvider>
