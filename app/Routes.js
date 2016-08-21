@@ -1,6 +1,7 @@
 import React from 'react';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, hashHistory, IndexRoute, applyRouterMiddleware } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux'
+import { useScroll } from 'react-router-scroll';
 
 import App from './App';
 import Index from './pages/Index';
@@ -25,7 +26,7 @@ const Routes = (props, context) => {
     }
   };
   return (
-    <Router history={historyStore}>
+    <Router history={historyStore} render={applyRouterMiddleware(useScroll())}>
       <Route path="/" component={App}>
         <IndexRoute component={Index} onEnter={auth.loginRequired} />
         <Route path="login" component={Login} />
