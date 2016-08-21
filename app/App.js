@@ -59,9 +59,15 @@ class App extends React.Component {
       path: '/user/myinfo/',
       withToken: true,
       sendingType: 'GET_PROFILE',
-      successType: 'GET_PROFILE_DONE',
       failureType: 'GET_PROFILE_ERROR'
-    }));
+    })).then(({body}) => {
+      store.dispatch({
+        type: 'GET_PROFILE_DONE',
+        response: body
+      })
+    }).catch(error => {
+      console.log(error);
+    });
     if (this.props.prevLocation.pathname == "/login") {
       store.dispatch(push('/'));
     } else {

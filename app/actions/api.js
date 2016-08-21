@@ -20,17 +20,5 @@ export const sendAjax = ({withToken = false, ...options}) => (dispatch, getState
     .query(query)
     .send(body);
 
-  return req.end((err, res)=> {
-      if (err) {
-        dispatch({
-          type: failureType,
-          response: err
-        });
-      } else {
-        dispatch({
-          type: successType,
-          response: res.body
-        });
-      }
-    });
+  return req;
 };
