@@ -4,7 +4,6 @@ import { routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
 
 import reducer from '../reducers';
-import apiMiddleware from '../middlewares/api';
 
 const INITIAL_STATE = { };
 
