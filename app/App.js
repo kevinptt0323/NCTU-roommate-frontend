@@ -85,7 +85,7 @@ class App extends React.Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={{width: '100vw', height: '100vh'}}>
+        <div style={{width: '100vw', height: '100vh', position: 'absolute'}}>
           <AppBar
             onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap}
             style={{ position: 'fixed', top: 0 }}
@@ -95,8 +95,9 @@ class App extends React.Component {
           <LeftNav ref="leftNav" />
           <div
             style={{
-              position: 'relative',
+              position: 'absolute',
               height: 'calc(100% - 64px)',
+              width: '100%',
               top: '64px'
             }}
           >
