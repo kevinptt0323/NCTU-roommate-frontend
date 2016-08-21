@@ -45,6 +45,8 @@ class App extends React.Component {
       loadProfile,
       setToken: this.props.setToken,
       profile: this.props.profile,
+      classes: this.props.classes,
+      buildings: this.props.buildings,
       server: prefix(config.SERVER_HOST),
     };
   }
@@ -156,12 +158,16 @@ App.childContextTypes = {
   config: PropTypes.object,
   token: PropTypes.string,
   server: PropTypes.func.isRequired,
-  profile: PropTypes.object
+  profile: PropTypes.object,
+  classes: PropTypes.object,
+  buildings: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   token: state.auth.token,
   profile: state.profile,
+  classes: state.classes,
+  buildings: state.buildings,
   prevLocation: state.routing.locationBeforeTransitions
 });
 

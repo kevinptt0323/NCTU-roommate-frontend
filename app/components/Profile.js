@@ -50,10 +50,7 @@ const viewerStyle = {
   margin: '50px auto',
 }
 
-const departments = [
-  '資訊工程學系',
-  '電機系',
-].map((value,index) => (<MenuItem key={index+1} value={index+1} primaryText={value} />));
+const classes2JSX = ({class_id, class_name}) => (<MenuItem key={class_id} value={class_id} primaryText={class_name} />);
 
 class ProfileEditor extends React.Component {
   constructor(props, context) {
@@ -138,7 +135,7 @@ class ProfileEditor extends React.Component {
         || this.context.profile.sending != nextContext.profile.sending;
   }
   render() {
-    const { profile } = this.context;
+    const { profile, classes, buildings } = this.context;
     let { formData, errorText, modified } = this.state;
     if (!modified) {
       formData = profile.data || {};
@@ -158,7 +155,7 @@ class ProfileEditor extends React.Component {
           case 'class_id':
             return (
               <SelectField {...props} onChange={this.handleSelectChange} maxHeight={200}>
-                {departments}
+                {classes.data.map(classes2JSX)}
               </SelectField>
             );
           case 'detail':
@@ -191,20 +188,33 @@ class ProfileEditor extends React.Component {
 ProfileEditor.contextTypes = {
   store: PropTypes.object.isRequired,
   profile: PropTypes.object,
+  classes: PropTypes.object,
+  buildings: PropTypes.object,
   loadProfile: PropTypes.func.isRequired
 };
 
 const ProfileViewer = (props, context) => {
   const { profile = {}, editable = false } = props;
+  const { classes, buildings } = context;
   const profileList = formDataKeys
     .filter(key => !!profile[key])
-    .map((key, index) => (
-      <ListItem
-        key={index}
-        primaryText={strings.profile[key]}
-        secondaryText={profile[key]}
-      />
-    ))
+    .map((key, index) => {
+      let text = "";
+      switch(key) {
+        case 'class_id':
+          text = classes.data.find(({class_id}) => class_id==profile[key]).class_name;
+          break;
+        default:
+          text = profile[key];
+      }
+      return (
+        <ListItem
+          key={index}
+          primaryText={strings.profile[key]}
+          secondaryText={text}
+        />
+      );
+    })
     .reduce((prev, curr, index) => (
       !!prev ? [...prev, <Divider key={`divider-${index}`} />, curr] : [curr]
     ), null);
@@ -215,6 +225,10 @@ const ProfileViewer = (props, context) => {
       </List>
     </ProgressPaper>
    )
+};
+ProfileViewer.contextTypes = {
+  classes: PropTypes.object,
+  buildings: PropTypes.object
 };
 const EditButton = () => (
   <IconButton
