@@ -11,7 +11,7 @@ class Index extends React.Component {
       <div>
         <RaisedButton
           primary={true}
-          containerElement={<Link to="/profile" />}
+          containerElement={<Link to="/user/myinfo" />}
           label="個人檔案" />
         <RaisedButton
           primary={true}

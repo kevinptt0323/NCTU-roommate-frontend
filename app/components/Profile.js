@@ -63,7 +63,6 @@ class ProfileEditor extends React.Component {
 
     this.textInputProps = {
       onChange: this.handleTextChange,
-      readonly: true,
       underlineShow: false,
       style: {
         width: 'calc(100% - 40px)',
@@ -194,8 +193,8 @@ const ProfileViewer = (props, context) => {
     .map((key,index) => (
       <ListItem key={index} primaryText={strings.profile[key]} secondaryText={profile[key]} />
     ))
-    .reduce((prev, curr) => (
-      !!prev ? [...prev, <Divider />, curr] : [curr]
+    .reduce((prev, curr, index) => (
+      !!prev ? [...prev, <Divider key={`divider-${index}`} />, curr] : [curr]
     ), null);
   return (
     <ProgressPaper style={viewerStyle}>

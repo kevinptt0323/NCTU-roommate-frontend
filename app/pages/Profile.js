@@ -1,8 +1,26 @@
 import React, { PropTypes } from 'react';
 
-import { ProfileEditor } from '../components/Profile';
+import { ProfileEditor, ProfileViewer } from '../components/Profile';
 
-class Profile extends React.Component {
+class View extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { store } = this.context;
+    return (
+      <div>
+        <ProfileViewer profile={store.getState().profile.data} />
+      </div>
+    );
+  }
+}
+
+View.contextTypes = {
+  store: React.PropTypes.object.isRequired
+};
+
+class Edit extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -16,9 +34,4 @@ class Profile extends React.Component {
   }
 }
 
-Profile.contextTypes = {
-  store: React.PropTypes.object.isRequired
-};
-
-export default Profile;
-
+export default { View, Edit };

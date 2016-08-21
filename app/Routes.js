@@ -29,7 +29,13 @@ const Routes = (props, context) => {
         <IndexRoute component={Index} onEnter={auth.loginRequired} />
         <Route path="login" component={Login} />
         <Route path="dorms" component={Dorm} onEnter={auth.loginRequired} />
-        <Route path="profile" component={Profile} onEnter={auth.loginRequired} />
+        <Route path="user">
+          <Route path="info" onEnter={auth.loginRequired} />
+          <Route path="myinfo" onEnter={auth.loginRequired}>
+            <IndexRoute component={Profile.View} />
+            <Route path="modify" component={Profile.Edit} />
+          </Route>
+        </Route>
       </Route>
     </Router>
   );
