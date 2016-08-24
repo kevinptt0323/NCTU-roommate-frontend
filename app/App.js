@@ -44,6 +44,7 @@ class App extends React.Component {
       postLogin,
       config,
       loadProfile,
+      location: this.props.location,
       setToken: this.props.setToken,
       profile: this.props.profile,
       classes: this.props.classes,
@@ -56,7 +57,6 @@ class App extends React.Component {
   }
   login() {
     const { store } = this.context;
-    store.dispatch(actions.setHistoryPath(this.props.prevLocation));
     store.dispatch(push('/login'));
   }
   loadProfile() {
@@ -113,11 +113,7 @@ class App extends React.Component {
     this.loadProfile();
     this.loadClasses();
     this.loadBuildings();
-    if (this.props.prevLocation.pathname == "/login") {
-      store.dispatch(push('/'));
-    } else {
-      store.dispatch(push(this.props.prevLocation));
-    }
+    store.dispatch(push('/'));
   }
   render() {
     return (
@@ -164,14 +160,15 @@ App.childContextTypes = {
   profile: PropTypes.object,
   classes: PropTypes.object,
   buildings: PropTypes.object,
+  location: PropTypes.object
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   token: state.auth.token,
   profile: state.profile,
   classes: state.classes,
   buildings: state.buildings,
-  prevLocation: state.routing.locationBeforeTransitions
+  location: props.location
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -19,42 +19,32 @@ const navStyle = {
   width: '100vw'
 };
 
-class BottomNav extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedIndex: 0,
-    };
-  }
+const navHref = ["/search", "/user/myinfo"];
 
-  select = (index) => this.setState({selectedIndex: index});
-
-  render() {
-    return (
-      <Paper style={navStyle}>
-        <BottomNavigation selectedIndex={this.state.selectedIndex}>
-          <BottomNavigationItem
-            label="找室友"
-            icon={searchIcon}
-            containerElement={<Link to="/search" />}
-            style={centeredText}
-            onTouchTap={() => this.select(0)}
-          />
-          <BottomNavigationItem
-            label="個人頁面"
-            icon={personIcon}
-            containerElement={<Link to="/user/myinfo" />}
-            style={centeredText}
-            onTouchTap={() => this.select(1)}
-          />
-        </BottomNavigation>
-      </Paper>
-    );
-  }
-}
+const BottomNav = (props, context) => {
+  const { location } = context;
+  return (
+    <Paper style={navStyle}>
+      <BottomNavigation selectedIndex={navHref.indexOf(location.pathname)}>
+        <BottomNavigationItem
+          label="找室友"
+          icon={searchIcon}
+          containerElement={<Link to={navHref[0]} />}
+          style={centeredText}
+        />
+        <BottomNavigationItem
+          label="個人頁面"
+          icon={personIcon}
+          containerElement={<Link to={navHref[1]} />}
+          style={centeredText}
+        />
+      </BottomNavigation>
+    </Paper>
+  );
+};
 
 BottomNav.contextTypes = {
-  store: React.PropTypes.object.isRequired
+  location: PropTypes.object
 };
 
 export default BottomNav;
