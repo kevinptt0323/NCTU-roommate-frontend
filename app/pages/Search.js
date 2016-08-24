@@ -1,31 +1,31 @@
 import React, { PropTypes } from 'react';
 import { Paper, Tabs, Tab, RaisedButton } from 'material-ui';
+import SimpleProfile from '../components/SimpleProfile';
 
-class Dorm extends React.Component {
+class Search extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const { store } = this.context;
-    const styles = {
-      headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
-        fontWeight: 400,
-      },
-    };
+    const searchResult = [{"uid": 1, "facebook_id": "123456789", "student_name": "user1", "detail": "", "email": "user1@example.com", "student_id": "0123456", "student_nickname": "user_nick1", "class_id": 6, "slogan": ""}, {"uid": 2, "facebook_id": "", "student_name": "user2", "detail": "", "email": "user2@example.com", "student_id": "0000000", "student_nickname": "user_nick2", "class_id": 6, "slogan": ""}];
+    const searchResultJSX = searchResult.map(profile => (
+      <SimpleProfile data={profile} />
+    ));
     return (
       <div>
-        找室友
+        <div>
+          找室友
+        </div>
+        <div>
+          { searchResultJSX }
+        </div>
       </div>
     );
   }
 }
 
-Dorm.contextTypes = {
+Search.contextTypes = {
   store: React.PropTypes.object.isRequired
 };
 
-export default Dorm;
-
+export default Search;
