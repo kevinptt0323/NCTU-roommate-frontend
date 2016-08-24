@@ -6,7 +6,7 @@ import { useScroll } from 'react-router-scroll';
 import App from './App';
 import Index from './pages/Index';
 import Login from './pages/Login';
-import Dorm from './pages/Dorm';
+import Search from './pages/Search';
 import Profile from './pages/Profile';
 import { EditButton } from './components/Profile';
 
@@ -29,7 +29,7 @@ const Routes = (props, context) => {
       <Route path="/" component={App}>
         <IndexRedirect to="/search" />
         <Route path="login" component={Login} />
-        <Route path="search" component={Dorm} onEnter={auth.loginRequired} />
+        <Route path="search" component={Search} onEnter={auth.loginRequired} />
         <Route path="user">
           <Route path="info/:uid" component={Profile.View} onEnter={auth.loginRequired} />
           <Route path="myinfo" onEnter={auth.loginRequired}>
