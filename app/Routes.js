@@ -19,7 +19,6 @@ const Routes = (props, context) => {
   const historyStore = syncHistoryWithStore(hashHistory, store);
   const auth = {
     loginRequired: (nextState, replace) => {
-      return;
       if (!store.getState().auth.token) {
         replace('/login');
       }
