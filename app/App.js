@@ -96,7 +96,7 @@ class App extends React.Component {
     const { store } = this.context;
     store.dispatch(sendAjax({
       method: 'get',
-      path: '/building/list/',
+      path: '/building/list/floor/',
       withToken: true,
       sendingType: 'GET_BUILDINGS'
     })).then(({body}) => {

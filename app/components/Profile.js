@@ -17,7 +17,8 @@ import { grey100, grey700 } from 'material-ui/styles/colors';
 import deepEqual from 'deep-equal';
 
 import { sendAjax } from '../actions/api';
-import ProgressPaper from '../components/ProgressPaper';
+import ProgressPaper from './ProgressPaper';
+import DormField from './DormField';
 
 const formDataKeys = ['student_name', 'student_nickname', 'class_id', 'student_id', 'room_id', 'email', 'facebook_id', 'slogan', 'detail'];
 
@@ -31,7 +32,7 @@ const strings = {
     student_nickname: '暱稱',
     class_id: '科系',
     student_id: '學號',
-    room_id: '房間',
+    room_id: ['宿舍', '房號'],
     email: 'email',
     facebook_id: 'facebook',
     slogan: '標語',
@@ -50,12 +51,16 @@ const viewerStyle = {
   margin: '50px auto',
 }
 
-const classes2JSX = ({class_id, class_name}) => (<MenuItem key={class_id} value={class_id} primaryText={class_name} />);
+const classes2JSX = ({class_id, class_name}) => (<MenuItem key={`class-${class_id}`} value={class_id} primaryText={class_name} />);
+const buildings2JSX = ({building_id, building_name}) => (<MenuItem key={`building-${building_id}`} value={building_id} primaryText={building_name} />);
 
 class ProfileEditor extends React.Component {
   constructor(props, context) {
     super(props);
     this.state = { formData: {}, errorText: {}, modified: false };
+
+    this.classMenu = context.classes.data.map(classes2JSX);
+    this.buildingMenu = context.buildings.data.map(buildings2JSX);
 
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -135,7 +140,7 @@ class ProfileEditor extends React.Component {
         || this.context.profile.sending != nextContext.profile.sending;
   }
   render() {
-    const { profile, classes, buildings } = this.context;
+    const { profile } = this.context;
     let { formData, errorText, modified } = this.state;
     if (!modified) {
       formData = profile.data || {};
@@ -145,7 +150,6 @@ class ProfileEditor extends React.Component {
         const props = {
           ...this.textInputProps,
           key,
-          onChange: this.handleTextChange,
           value: formData[key],
           errorText: errorText[key],
           name: key,
@@ -155,8 +159,24 @@ class ProfileEditor extends React.Component {
           case 'class_id':
             return (
               <SelectField {...props} onChange={this.handleSelectChange} maxHeight={200}>
-                {classes.data.map(classes2JSX)}
+                {this.classMenu}
               </SelectField>
+            );
+          case 'room_id':
+            return (
+              <div>
+                <SelectField
+                  underlineShow={false}
+                  key='building_id'
+                  value={formData['building_id']}
+                  errorText={errorText['building_id']}
+                  name='building_id'
+                  floatingLabelText={props.floatingLabelText[0]}
+                >
+                  {this.buildingMenu}
+                </SelectField>
+                <TextField {...props} />
+              </div>
             );
           case 'detail':
             return (
