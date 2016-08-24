@@ -62,7 +62,6 @@ class ProfileEditor extends React.Component {
     this.buildingMenu = context.buildings.data.map(buildings2JSX);
 
     this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
     this.submit = this.submit.bind(this);
 
     this.textInputProps = {
@@ -83,8 +82,11 @@ class ProfileEditor extends React.Component {
     }
     let failure = false;
     keys.forEach(key => {
-      errorText[key] = !!formData[key] ? "" : errorMessage.cantBeEmpty;
-      failure = failure || !!errorText[key];
+      switch(key) {
+        case 'student_name':
+          errorText[key] = !!formData[key] ? "" : errorMessage.cantBeEmpty;
+          failure = failure || !!errorText[key];
+      }
     });
     errorText = update(this.state.errorText, {$merge: errorText});
     this.setState({ errorText }, failure ? onFailure : onSuccess);
@@ -94,11 +96,14 @@ class ProfileEditor extends React.Component {
     let data = {...profile.data, ...this.state.formData};
     this.setState({ formData: data, modified: true }, () => {
       this.validate(formDataKeys, () => {
+        const formData = {...this.state.formData};
+        formData.room = { building_id: formData.building_id, room_name: formData.room_name };
+        formData.room_id = undefined;
         store.dispatch(sendAjax({
           method: 'patch',
           path: '/user/myinfo/modify/',
           withToken: true,
-          body: this.state.formData,
+          body: formData,
           sendingType: 'SEND_PROFILE',
           failureType: 'SEND_PROFILE_ERROR'
         })).then(() => {
@@ -122,8 +127,7 @@ class ProfileEditor extends React.Component {
     formData = {...formData, [key]: value};
     this.setState({ formData, modified: true }, () => this.validate(key));
   }
-  handleSelectChange(e, index, value) {
-    const key = 'class_id';
+  handleSelectChange(key, e, index, value) {
     let formData = this.state.formData;
     if (!this.state.modified) {
       formData = update(this.state.formData, {$merge: this.context.profile.data});
@@ -142,7 +146,7 @@ class ProfileEditor extends React.Component {
     const { profile } = this.context;
     let { formData, errorText, modified } = this.state;
     if (!modified) {
-      formData = profile.data || {};
+      formData = profile.data;
     }
     const textFields = formDataKeys
       .map((key) => {
@@ -157,7 +161,7 @@ class ProfileEditor extends React.Component {
         switch (key) {
           case 'class_id':
             return (
-              <SelectField {...props} onChange={this.handleSelectChange} maxHeight={200}>
+              <SelectField {...props} onChange={this.handleSelectChange.bind(this, 'class_id')} maxHeight={200}>
                 {this.classMenu}
               </SelectField>
             );
@@ -165,16 +169,28 @@ class ProfileEditor extends React.Component {
             return (
               <div>
                 <SelectField
+                  style={{ paddingLeft: 20, verticalAlign: 'top' }}
                   underlineShow={false}
                   key='building_id'
                   value={formData['building_id']}
                   errorText={errorText['building_id']}
                   name='building_id'
                   floatingLabelText={props.floatingLabelText[0]}
+                  onChange={this.handleSelectChange.bind(this, 'building_id')}
+                  maxHeight={200}
                 >
                   {this.buildingMenu}
                 </SelectField>
-                <TextField {...props} />
+                <TextField
+                  style={{ paddingLeft: 20 }}
+                  underlineShow={false}
+                  key='room_name'
+                  value={formData['room_name']}
+                  errorText={errorText['room_name']}
+                  name='room_name'
+                  floatingLabelText={props.floatingLabelText[1]}
+                  onChange={this.handleTextChange}
+                />
               </div>
             );
           case 'detail':
