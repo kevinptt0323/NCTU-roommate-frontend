@@ -30,13 +30,13 @@ const Routes = (props, context) => {
       <Route path="/" component={App}>
         <IndexRoute component={Index} onEnter={auth.loginRequired} />
         <Route path="login" component={Login} />
-        <Route path="dorms" component={Dorm} onEnter={auth.loginRequired} />
+        <Route path="search" component={Dorm} onEnter={auth.loginRequired} />
         <Route path="user">
           <Route path="info/:uid" component={Profile.View} onEnter={auth.loginRequired} />
           <Route path="myinfo" onEnter={auth.loginRequired}>
             <IndexRoute components={{
               children: props => <Profile.View myinfo={true} {...props} />,
-              appbarElementRight: EditButton
+              appbarElementRight: EditButton,
             }} />
             <Route path="modify" component={Profile.Edit} />
           </Route>

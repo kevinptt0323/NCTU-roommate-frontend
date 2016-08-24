@@ -12,6 +12,7 @@ import { indigo500 } from 'material-ui/styles/colors';
 
 /* custom components */
 import LeftNav from './components/LeftNav';
+import BottomNav from './components/BottomNav';
 import * as config from './config';
 
 import { sendAjax } from './actions/api';
@@ -129,6 +130,7 @@ class App extends React.Component {
             iconElementRight={this.props.appbarElementRight}
           />
           <LeftNav ref="leftNav" />
+          <BottomNav />
           <div
             style={{
               position: 'absolute',

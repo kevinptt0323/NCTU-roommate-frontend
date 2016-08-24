@@ -17,21 +17,7 @@ class Dorm extends React.Component {
     };
     return (
       <div>
-        <Tabs>
-          <Tab label="Token">
-            <div>
-              Token is {store.getState().auth.token}
-            </div>
-          </Tab>
-          <Tab label="Item Two" >
-            <div>
-              <h2 style={styles.headline}>Tab Two</h2>
-              <p>
-                This is another example tab.
-              </p>
-            </div>
-          </Tab>
-        </Tabs>
+        找室友
       </div>
     );
   }

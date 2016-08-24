@@ -18,7 +18,6 @@ import deepEqual from 'deep-equal';
 
 import { sendAjax } from '../actions/api';
 import ProgressPaper from './ProgressPaper';
-import DormField from './DormField';
 
 const formDataKeys = ['student_name', 'student_nickname', 'class_id', 'student_id', 'room_id', 'email', 'facebook_id', 'slogan', 'detail'];
 
