@@ -134,9 +134,10 @@ class App extends React.Component {
           <div
             style={{
               position: 'absolute',
-              height: 'calc(100% - 64px)',
+              top: 64,
+              height: 'calc(100% - 64px - 56px)',
               width: '100%',
-              top: '64px'
+              overflow: 'auto'
             }}
           >
             {this.props.children}
