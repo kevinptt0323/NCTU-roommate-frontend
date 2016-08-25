@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Paper, Tabs, Tab, RaisedButton } from 'material-ui';
 import { GridList } from 'material-ui/GridList';
 import SimpleProfile from '../components/SimpleProfile';
+import SearchBar from '../components/SearchBar';
 
 const gridStyle = {
   maxWidth: '80%',
@@ -28,7 +29,7 @@ class Search extends React.Component {
     return (
       <div>
         <div>
-          找室友
+          <SearchBar />
         </div>
         <GridList
           style={gridStyle}
