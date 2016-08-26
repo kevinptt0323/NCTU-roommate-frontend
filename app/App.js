@@ -49,6 +49,7 @@ class App extends React.Component {
       profile: this.props.profile,
       classes: this.props.classes,
       buildings: this.props.buildings,
+      search: this.props.search,
       server: prefix(config.SERVER_HOST),
     };
   }
@@ -160,6 +161,7 @@ App.childContextTypes = {
   profile: PropTypes.object,
   classes: PropTypes.object,
   buildings: PropTypes.object,
+  search: PropTypes.object,
   location: PropTypes.object
 };
 
@@ -168,6 +170,7 @@ const mapStateToProps = (state, props) => ({
   profile: state.profile,
   classes: state.classes,
   buildings: state.buildings,
+  search: state.search,
   location: props.location
 });
 

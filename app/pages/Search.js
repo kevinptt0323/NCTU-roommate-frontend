@@ -11,25 +11,19 @@ const gridStyle = {
 };
 
 class Search extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(...args) {
+    super(...args);
   }
   render() {
-    const searchResult = [
-      {"uid": 1, "facebook_id": "123456789", "student_name": "user1", "detail": "", "email": "user1@example.com", "student_id": "0123456", "student_nickname": "user_nick1", "class_id": 6, "slogan": ""},
-      {"uid": 2, "facebook_id": "", "student_name": "user2", "detail": "", "email": "user2@example.com", "student_id": "0000000", "student_nickname": "user_nick2", "class_id": 6, "slogan": ""},
-      {"uid": 3, "facebook_id": "123456789", "student_name": "user1", "detail": "", "email": "user1@example.com", "student_id": "0123456", "student_nickname": "user_nick1", "class_id": 6, "slogan": ""},
-      {"uid": 4, "facebook_id": "", "student_name": "user2", "detail": "", "email": "user2@example.com", "student_id": "0000000", "student_nickname": "user_nick2", "class_id": 6, "slogan": ""},
-      {"uid": 5, "facebook_id": "123456789", "student_name": "user1", "detail": "", "email": "user1@example.com", "student_id": "0123456", "student_nickname": "user_nick1", "class_id": 6, "slogan": ""},
-      {"uid": 6, "facebook_id": "", "student_name": "user2", "detail": "", "email": "user2@example.com", "student_id": "0000000", "student_nickname": "user_nick2", "class_id": 6, "slogan": ""},
-    ];
-    const searchResultJSX = searchResult.map(profile => (
-      <SimpleProfile data={profile} />
+    const searchResultJSX = this.context.search.data.map(profile => (
+      <SimpleProfile key={`user-${profile.uid}`} data={profile} />
     ));
     return (
       <div>
-        <div>
-          <SearchBar />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '50px auto' }}>
+          <Paper style={{ display: 'inline-block', padding: 20 }}>
+            <SearchBar />
+          </Paper>
         </div>
         <GridList
           style={gridStyle}
@@ -44,7 +38,8 @@ class Search extends React.Component {
 }
 
 Search.contextTypes = {
-  store: React.PropTypes.object.isRequired
+  store: React.PropTypes.object.isRequired,
+  search: PropTypes.object,
 };
 
 export default Search;

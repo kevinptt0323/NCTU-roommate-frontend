@@ -4,6 +4,7 @@ import auth from './auth';
 import profile from './profile';
 import classes from './classes';
 import buildings from './buildings';
+import search from './search';
 import myRouting from './route';
 
 export default combineReducers({
@@ -11,6 +12,7 @@ export default combineReducers({
   profile,
   classes,
   buildings,
+  search,
   myRouting,
   routing,
 });
