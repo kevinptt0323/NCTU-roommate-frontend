@@ -1,4 +1,4 @@
-const initialState = { data: {} };
+const initialState = { data: [] };
 const classesReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'GET_CLASSES_DONE':

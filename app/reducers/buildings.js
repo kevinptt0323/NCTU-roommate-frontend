@@ -1,4 +1,4 @@
-const initialState = { data: {} };
+const initialState = { data: [] };
 const buildingsReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'GET_BUILDINGS_DONE':
