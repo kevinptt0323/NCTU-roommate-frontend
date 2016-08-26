@@ -143,7 +143,7 @@ class ProfileEditor extends React.Component {
     if (!this.state.modified) {
       formData = update(this.state.formData, {$merge: this.context.profile.data});
     }
-    formData = {...formData, [key]: value|0};
+    formData = {...formData, [key]: value};
     this.setState({ formData, modified: true }, () => this.validate(key));
   }
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -260,9 +260,13 @@ const ProfileViewer = (props, context) => {
     .filter(key => !!profile[key])
     .map((key, index) => {
       let text = "";
+      let enableString = (key=='student_name' || profile[`${key}_enable`]) ? "" : " (不公開)";
       switch(key) {
         case 'class_id':
           text = classes.data.find(({class_id}) => class_id==profile[key]).class_name;
+          break;
+        case 'room_id':
+          text = buildings.data.find(({building_id}) => building_id==profile.building_id).building_name + profile.room_name;
           break;
         default:
           text = profile[key];
@@ -270,7 +274,7 @@ const ProfileViewer = (props, context) => {
       return (
         <ListItem
           key={index}
-          primaryText={strings.profile[key]}
+          primaryText={strings.profile[key] + enableString}
           secondaryText={text}
         />
       );
