@@ -11,6 +11,7 @@ import {
   MenuItem,
   TextField
 } from 'material-ui';
+import Toggle from 'material-ui/Toggle';
 import IconButton from 'material-ui/IconButton';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import { grey100, grey700 } from 'material-ui/styles/colors';
@@ -62,13 +63,14 @@ class ProfileEditor extends React.Component {
     this.buildingMenu = context.buildings.data.map(buildings2JSX);
 
     this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
     this.submit = this.submit.bind(this);
 
     this.textInputProps = {
       onChange: this.handleTextChange,
       underlineShow: false,
       style: {
-        width: 'calc(100% - 40px)',
+        width: 'calc(100% - 140px)',
         marginLeft: 20,
       },
     };
@@ -135,6 +137,15 @@ class ProfileEditor extends React.Component {
     formData = {...formData, [key]: value};
     this.setState({ formData, modified: true }, () => this.validate(key));
   }
+  handleToggle(e, value) {
+    const { name: key } = e.target;
+    let formData = this.state.formData;
+    if (!this.state.modified) {
+      formData = update(this.state.formData, {$merge: this.context.profile.data});
+    }
+    formData = {...formData, [key]: value|0};
+    this.setState({ formData, modified: true }, () => this.validate(key));
+  }
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     const { formData, errorText } = this.state;
     const { formData: formData2, errorText: errorText2 } = nextState;
@@ -145,11 +156,12 @@ class ProfileEditor extends React.Component {
   render() {
     const { profile } = this.context;
     let { formData, errorText, modified } = this.state;
+    let ret;
     if (!modified) {
       formData = profile.data;
     }
     const textFields = formDataKeys
-      .map((key) => {
+      .map(key => {
         const props = {
           ...this.textInputProps,
           key,
@@ -160,13 +172,14 @@ class ProfileEditor extends React.Component {
         };
         switch (key) {
           case 'class_id':
-            return (
+            ret = (
               <SelectField {...props} onChange={this.handleSelectChange.bind(this, 'class_id')} maxHeight={200}>
                 {this.classMenu}
               </SelectField>
             );
+            break;
           case 'room_id':
-            return (
+            ret = (
               <div>
                 <SelectField
                   style={{ paddingLeft: 20, verticalAlign: 'top' }}
@@ -193,15 +206,27 @@ class ProfileEditor extends React.Component {
                 />
               </div>
             );
+            break;
           case 'detail':
-            return (
-              <TextField {...props} multiLine={true} rows={2} />
-            );
+            ret = <TextField {...props} multiLine={true} rows={2} />;
+            break;
           default:
-            return (
-              <TextField {...props} />
-            );
+            ret = <TextField {...props} />;
         }
+        let toggled = key=='student_name' || !!formData[`${key}_enable`];
+        return (
+          <div key={`row-${key}`} style={{position: 'relative', display: 'flex', alignItems: 'center'}}>
+            <Toggle
+              disabled={key=='student_name'}
+              toggled={toggled}
+              style={{ position: 'absolute', right: 20, width: 'initial' }}
+              label={toggled ? "公開" : "不公開"}
+              onToggle={this.handleToggle}
+              name={`${key}_enable`}
+            />
+            {ret}
+          </div>
+        );
       })
       .reduce((prev, curr, index) => (
         !!prev ? [...prev, <Divider key={`divider-${index}`} />, curr] : [curr]
