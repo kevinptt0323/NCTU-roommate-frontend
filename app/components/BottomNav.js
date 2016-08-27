@@ -3,14 +3,14 @@ import { Link } from 'react-router';
 
 import { Paper, Tabs, Tab, RaisedButton } from 'material-ui';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
-import IconSearch from 'material-ui/svg-icons/action/search';
-import IconPerson from 'material-ui/svg-icons/social/person';
+import SearchIcon from 'material-ui/svg-icons/action/search';
+import PersonIcon from 'material-ui/svg-icons/social/person';
+import InfoIcon from 'material-ui/svg-icons/action/info-outline';
+import ForumIcon from 'material-ui/svg-icons/communication/forum';
 
 /* style quick fix for material-ui pr #4982 */
 const centeredIcon = { width: '100%' };
 const centeredText = { textAlign: 'center' };
-const searchIcon = <IconSearch style={centeredIcon} />;
-const personIcon = <IconPerson style={centeredIcon} />;
 
 const navStyle = {
   position: 'fixed',
@@ -28,25 +28,25 @@ const BottomNav = (props, context) => {
       <BottomNavigation selectedIndex={navHref.indexOf(location.pathname)}>
         <BottomNavigationItem
           label="找室友"
-          icon={searchIcon}
+          icon={<SearchIcon style={centeredIcon} />}
           containerElement={<Link to={navHref[0]} />}
           style={centeredText}
         />
         <BottomNavigationItem
           label="個人頁面"
-          icon={personIcon}
+          icon={<PersonIcon style={centeredIcon} />}
           containerElement={<Link to={navHref[1]} />}
           style={centeredText}
         />
         <BottomNavigationItem
           label="隱私權條款"
-          icon={personIcon}
+          icon={<InfoIcon style={centeredIcon} />}
           containerElement={<Link to={navHref[2]} />}
           style={centeredText}
         />
         <BottomNavigationItem
           label="聯絡我們"
-          icon={personIcon}
+          icon={<ForumIcon style={centeredIcon} />}
           containerElement={<Link to={navHref[3]} />}
           style={centeredText}
         />
