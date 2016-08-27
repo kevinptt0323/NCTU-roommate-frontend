@@ -65,7 +65,7 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <div style={gridStyle}><FaceIcon style={iconStyle} />{student_id}</div>
-          <div style={gridStyle}><FacebookIcon style={iconStyle} />{facebook_id}</div>
+          <div style={gridStyle}><FacebookIcon style={iconStyle} />fb.com/{facebook_id}</div>
         </div>
         <Divider />
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
