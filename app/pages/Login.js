@@ -26,19 +26,20 @@ class Login extends React.Component {
           height: '100%',
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          backgroundImage: 'url(https://roommate.twmicrosheep.com/static/landing_background.png)',
+          backgroundSize: 'cover'
         }}
       >
-        <Paper
-          zDepth={1}
+        <div
           style={{
             padding: 24,
             textAlign: 'center',
             display: 'inline-block'
           }}
         >
-          <RaisedButton label="D2 登入" href={`${this.context.config.SERVER_HOST}/d2login/`} />
-        </Paper>
+          <RaisedButton label="D2 登入" primary={true} href={`${this.context.config.SERVER_HOST}/d2login/`} />
+        </div>
       </div>
     );
   }
