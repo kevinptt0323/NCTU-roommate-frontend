@@ -287,11 +287,11 @@ const ProfileViewer = (props, context) => {
         { profileList }
       </List>
       {
-        this.props.myinfo ?
-          <Divider />
+        props.myinfo ? [
+          <Divider />,
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
             <RaisedButton secondary={true} label="編輯" containerElement={<Link to="/user/myinfo/modify" />} />
-          </div> :
+          </div>] :
         null
       }
     </ProgressPaper>
