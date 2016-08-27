@@ -33,8 +33,8 @@ const strings = {
     class_id: '科系',
     student_id: '學號',
     room_id: ['宿舍', '房號'],
-    email: 'email',
-    facebook_id: 'facebook',
+    email: 'E-mail',
+    facebook_id: 'Facebook ID ( http://findmyfbid.com/ )',
     slogan: '標語',
     detail: '自我介紹',
   }
