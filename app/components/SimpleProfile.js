@@ -50,7 +50,7 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
     verticalAlign: 'middle'
   };
   return (
-    <Card style={{height: '100%'}}>
+    <Card style={props.style}>
       <CardHeader
         title={student_name}
         subtitle={student_nickname}

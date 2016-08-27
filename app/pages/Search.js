@@ -6,8 +6,9 @@ import SearchBar from '../components/SearchBar';
 
 const searchResultStyle = {
   maxWidth: '80%',
-  margin: '0 auto 20px',
-  overflow: 'visible'
+  margin: '0 auto',
+  overflow: 'visible',
+  paddingBottom: 20
 };
 
 class Search extends React.Component {
@@ -16,12 +17,13 @@ class Search extends React.Component {
   }
   render() {
     const searchResultJSX = this.context.search.data.map(profile => (
-      <SimpleProfile key={`user-${profile.uid}`} data={profile} />
+      <SimpleProfile key={`user-${profile.uid}`} data={profile} style={{margin: '20px 0'}} />
     ));
     return (
       <div
         style={{
           minHeight: '100%',
+          backgroundAttachment: 'fixed',
           backgroundImage: 'url(https://roommate.twmicrosheep.com/static/landing_background.png)',
           backgroundSize: 'cover'
         }}
