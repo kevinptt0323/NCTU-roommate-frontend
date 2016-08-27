@@ -22,21 +22,25 @@ const navStyle = {
 const navHref = ["/search", "/user/myinfo", "/privacy", "/contact"];
 
 const BottomNav = (props, context) => {
-  const { location } = context;
+  const { location: { pathname }, token } = context;
+  let authStyle = {};
+  if (!token) {
+    authStyle.display = 'none';
+  }
   return (
     <Paper style={navStyle}>
-      <BottomNavigation selectedIndex={navHref.indexOf(location.pathname)}>
+      <BottomNavigation selectedIndex={navHref.indexOf(pathname)}>
         <BottomNavigationItem
           label="找室友"
           icon={<SearchIcon style={centeredIcon} />}
           containerElement={<Link to={navHref[0]} />}
-          style={centeredText}
+          style={{...centeredText, ...authStyle}}
         />
         <BottomNavigationItem
           label="個人頁面"
           icon={<PersonIcon style={centeredIcon} />}
           containerElement={<Link to={navHref[1]} />}
-          style={centeredText}
+          style={{...centeredText, ...authStyle}}
         />
         <BottomNavigationItem
           label="隱私權條款"
@@ -56,7 +60,8 @@ const BottomNav = (props, context) => {
 };
 
 BottomNav.contextTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
+  token: PropTypes.string
 };
 
 export default BottomNav;
