@@ -4,10 +4,10 @@ import { GridList } from 'material-ui/GridList';
 import SimpleProfile from '../components/SimpleProfile';
 import SearchBar from '../components/SearchBar';
 
-const gridStyle = {
+const searchResultStyle = {
   maxWidth: '80%',
-  overflowY: 'auto',
-  margin: 'auto'
+  margin: '0 auto 20px',
+  overflow: 'visible'
 };
 
 class Search extends React.Component {
@@ -25,13 +25,9 @@ class Search extends React.Component {
             <SearchBar />
           </Paper>
         </div>
-        <GridList
-          style={gridStyle}
-          cols={4}
-          padding={1}
-        >
+        <div style={searchResultStyle}>
           { searchResultJSX }
-        </GridList>
+        </div>
       </div>
     );
   }
