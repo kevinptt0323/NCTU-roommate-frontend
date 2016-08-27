@@ -42,12 +42,12 @@ const strings = {
 
 const editorStyle = {
   maxWidth: 600,
-  margin: '50px auto',
+  margin: 'auto'
 };
 
 const viewerStyle = {
   maxWidth: 600,
-  margin: '50px auto',
+  margin: 'auto'
 }
 
 const classes2JSX = ({class_id, class_name}) => (<MenuItem key={`class-${class_id}`} value={class_id} primaryText={class_name} />);
@@ -231,7 +231,7 @@ class ProfileEditor extends React.Component {
         !!prev ? [...prev, <Divider key={`divider-${index}`} />, curr] : [curr]
       ), null);
     return (
-      <ProgressPaper style={editorStyle} loading={profile.sending}>
+      <ProgressPaper style={{...editorStyle, ...this.props.style}} loading={profile.sending}>
         <div>
           { textFields }
           <Divider />
@@ -282,7 +282,7 @@ const ProfileViewer = (props, context) => {
       !!prev ? [...prev, <Divider key={`divider-${index}`} />, curr] : [curr]
     ), null);
   return (
-    <ProgressPaper style={viewerStyle}>
+    <ProgressPaper style={{...viewerStyle, ...props.style}}>
       <List>
         { profileList }
       </List>

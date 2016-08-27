@@ -28,8 +28,8 @@ class Search extends React.Component {
       <div
         style={{
           minHeight: '100%',
-          backgroundAttachment: 'fixed',
           backgroundImage: 'url(https://roommate.twmicrosheep.com/static/landing_background.png)',
+          backgroundAttachment: 'fixed',
           backgroundSize: 'cover'
         }}
       >
