@@ -11,7 +11,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { grey800 } from 'material-ui/styles/colors';
 
 /* custom components */
-import LeftNav from './components/LeftNav';
 import BottomNav from './components/BottomNav';
 import * as config from './config';
 
@@ -29,7 +28,6 @@ class App extends React.Component {
     super(props);
     this.state = {};
 
-    this.onLeftIconButtonTouchTap = this.onLeftIconButtonTouchTap.bind(this);
     this.login = this.login.bind(this);
     this.postLogin = this.postLogin.bind(this);
     this.loadProfile = this.loadProfile.bind(this);
@@ -52,9 +50,6 @@ class App extends React.Component {
       search: this.props.search,
       server: prefix(config.SERVER_HOST),
     };
-  }
-  onLeftIconButtonTouchTap() {
-    this.refs.leftNav.handleToggle();
   }
   login() {
     const { store } = this.context;
@@ -121,12 +116,11 @@ class App extends React.Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={{width: '100vw', height: '100vh', position: 'absolute'}}>
           <AppBar
-            onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap}
             style={{ position: 'fixed', top: 0 }}
+            showMenuIconButton={false}
             title="交大 找小豬 平台"
             iconElementRight={this.props.appbarElementRight}
           />
-          <LeftNav ref="leftNav" />
           <BottomNav />
           <div
             style={{
