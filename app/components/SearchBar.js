@@ -91,11 +91,11 @@ class SearchBar extends React.Component {
     this.menus.building_id = buildings.data.map(buildings2JSX);
     this.menus.class_id = classes.data.map(classes2JSX);
     return (
-      <div>
+      <div style={{ textAlign: 'center' }}>
         <SelectField
           value={this.state.input1}
           onChange={this.changeSelect1}
-          style={{ verticalAlign: 'top', margin: '0 5px' }}
+          style={{ verticalAlign: 'top', margin: '0 5px', textAlign: 'left' }}
           hintText="找室友"
         >
           <MenuItem value="building_id" primaryText="宿舍" />
@@ -105,14 +105,23 @@ class SearchBar extends React.Component {
         </SelectField>
         {
           this.state.input1 ?
-            <SelectField value={this.state.input2} onChange={this.changeSelect2} style={{ verticalAlign: 'top', margin: '0 5px' }}>
+            <SelectField
+              value={this.state.input2}
+              onChange={this.changeSelect2}
+              style={{ verticalAlign: 'top', margin: '0 5px', textAlign: 'left' }}
+            >
               { this.menus[this.state.input1] }
             </SelectField> :
             null
         }
         {
           this.state.input2 ?
-            <TextField style={{ margin: '0 5px' }} value={this.state.input3} hintText={input2Hint} onChange={this.changeText} /> :
+            <TextField
+              style={{ margin: '0 5px' }}
+              value={this.state.input3}
+              hintText={input2Hint}
+              onChange={this.changeText}
+            /> :
             null
         }
         <RaisedButton disabled={!(this.state.input1&&this.state.input2&&this.state.input3)} primary={true} icon={<SearchIcon />} onTouchTap={this.sendSearch} />
