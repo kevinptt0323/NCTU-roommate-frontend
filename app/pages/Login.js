@@ -40,7 +40,7 @@ class Login extends React.Component {
         >
           <h1 style={{ fontSize: '4em' }}>交大新生</h1>
           <h1 style={{ fontSize: '4em' }}>找小豬系統</h1>
-          <RaisedButton label="D2 登入" secondary={true} href={`${this.context.config.SERVER_HOST}/d2login/`} />
+          <RaisedButton label="尋找室友" secondary={true} href={`${this.context.config.SERVER_HOST}/d2login/`} />
         </div>
       </div>
     );
