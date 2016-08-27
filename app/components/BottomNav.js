@@ -34,7 +34,7 @@ const BottomNav = (props, context) => {
           label="找室友"
           icon={<SearchIcon style={centeredIcon} />}
           containerElement={<Link to={navHref[0]} />}
-          style={{...centeredText, ...authStyle}}
+          style={centeredText}
         />
         <BottomNavigationItem
           label="個人頁面"
