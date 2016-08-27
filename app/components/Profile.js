@@ -266,7 +266,7 @@ const ProfileViewer = (props, context) => {
           text = classes.data.find(({class_id}) => class_id==profile[key]).class_name;
           break;
         case 'room_id':
-          text = buildings.data.find(({building_id}) => building_id==profile.building_id).building_name + profile.room_name;
+          text = buildings.data.find(({building_id}) => building_id==profile.building_id).building_name + ' ' + profile.room_name;
           break;
         default:
           text = profile[key];
