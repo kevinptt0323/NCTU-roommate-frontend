@@ -36,8 +36,8 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
     classString = classes.data.find(({class_id: _id}) => _id==class_id).class_name;
   }
   let roomString;
-  if (profile.room) {
-    roomString = buildings.data.find(({building_id: id}) => _id==building_id).building_name + ' ' + room_name;
+  if (room) {
+    roomString = buildings.data.find(({building_id}) => building_id==room.building_id).building_name + ' ' + room.room_name;
   }
   const gridStyle = {
     flex: 1,
