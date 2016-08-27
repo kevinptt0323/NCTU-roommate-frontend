@@ -26,6 +26,8 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
     student_id,
     room_id,
     room,
+    building_id,
+    room_name,
     email,
     facebook_id,
     slogan,
@@ -36,8 +38,8 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
     classString = classes.data.find(({class_id: _id}) => _id==class_id).class_name;
   }
   let roomString;
-  if (room) {
-    roomString = buildings.data.find(({building_id}) => building_id==room.building_id).building_name + ' ' + room.room_name;
+  if (building_id) {
+    roomString = buildings.data.find(({building_id: _building_id}) => _building_id==building_id).building_name + ' ' + room_name;
   }
   facebook_id = facebook_id ? `//fb.com/${facebook_id}` : '';
   const gridStyle = {
