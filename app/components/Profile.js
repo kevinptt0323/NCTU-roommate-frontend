@@ -237,7 +237,7 @@ class ProfileEditor extends React.Component {
           { textFields }
           <Divider />
           <div style={{ textAlign: 'center', marginTop: 20 }}>
-            <RaisedButton primary={true} label="儲存" onTouchTap={this.submit} />
+            <RaisedButton secondary={true} label="儲存" onTouchTap={this.submit} />
           </div>
         </div>
       </ProgressPaper>

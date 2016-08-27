@@ -124,7 +124,12 @@ class SearchBar extends React.Component {
             /> :
             null
         }
-        <RaisedButton disabled={search.sending || !(this.state.input1&&this.state.input2&&this.state.input3)} primary={true} icon={<SearchIcon />} onTouchTap={this.sendSearch} />
+        <RaisedButton
+          disabled={search.sending || !(this.state.input1&&this.state.input2&&this.state.input3)}
+          secondary={true}
+          icon={<SearchIcon />}
+          onTouchTap={this.sendSearch}
+        />
       </div>
     );
   }
