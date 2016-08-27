@@ -75,7 +75,7 @@ class SearchBar extends React.Component {
     });
   }
   render() {
-    const { buildings, classes } = this.context;
+    const { buildings, classes, search } = this.context;
     let input2Hint = "";
     switch (this.state.input1) {
       case 'building_id':
@@ -124,7 +124,7 @@ class SearchBar extends React.Component {
             /> :
             null
         }
-        <RaisedButton disabled={!(this.state.input1&&this.state.input2&&this.state.input3)} primary={true} icon={<SearchIcon />} onTouchTap={this.sendSearch} />
+        <RaisedButton disabled={search.sending || !(this.state.input1&&this.state.input2&&this.state.input3)} primary={true} icon={<SearchIcon />} onTouchTap={this.sendSearch} />
       </div>
     );
   }
@@ -134,6 +134,7 @@ SearchBar.contextTypes = {
   store: PropTypes.object.isRequired,
   classes: PropTypes.object,
   buildings: PropTypes.object,
+  search: PropTypes.object
 };
 
 
