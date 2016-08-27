@@ -1,8 +1,7 @@
 import React from 'react';
-import { Paper } from 'material-ui';
 
 const Privacy = props => (
-  <Paper style={{ display: 'inline-block', padding: 20 }}>
+  <div style={{ padding: 20 }}>
     <h1>隱私權條款</h1>
     <h4>非常歡迎您使用「交大找室友網站」（以下簡稱本網站），為了讓您能夠安心的使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容：</h4>
     <h4>一、隱私權保護政策的適用範圍</h4>
@@ -19,7 +18,7 @@ const Privacy = props => (
     <p>為了提供您最佳的服務，本網站會在您的電腦中放置並取用我們的Cookie，若您不願接受Cookie的寫入，您可在您使用的瀏覽器功能項中設定隱私權等級為高，即可拒絕Cookie的寫入，但可能會導至網站某些功能無法正常執行 。</p>
     <h4>七、隱私權保護政策之修正</h4>
     <p>本網站隱私權保護政策將因應需求隨時進行修正，修正後的條款將刊登於網站上。</p>
-  </Paper>
+  </div>
 );
 
 export default Privacy;
