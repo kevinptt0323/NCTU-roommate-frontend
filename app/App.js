@@ -8,7 +8,7 @@ import { push } from 'react-router-redux';
 import { AppBar } from 'material-ui';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { grey800 } from 'material-ui/styles/colors';
+import { orange300, grey800 } from 'material-ui/styles/colors';
 
 /* custom components */
 import BottomNav from './components/BottomNav';
@@ -20,6 +20,7 @@ import * as actions from './actions';
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: grey800,
+    accent1Color: orange300
   },
 });
 

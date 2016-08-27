@@ -19,8 +19,14 @@ class Search extends React.Component {
       <SimpleProfile key={`user-${profile.uid}`} data={profile} />
     ));
     return (
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '50px auto' }}>
+      <div
+        style={{
+          minHeight: '100%',
+          backgroundImage: 'url(https://roommate.twmicrosheep.com/static/landing_background.png)',
+          backgroundSize: 'cover'
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', padding: '50px 0' }}>
           <Paper style={{ display: 'inline-block', padding: 20 }}>
             <SearchBar />
           </Paper>

@@ -38,7 +38,9 @@ class Login extends React.Component {
             display: 'inline-block'
           }}
         >
-          <RaisedButton label="D2 登入" primary={true} href={`${this.context.config.SERVER_HOST}/d2login/`} />
+          <h1 style={{ fontSize: '4em' }}>交大新生</h1>
+          <h1 style={{ fontSize: '4em' }}>找小豬系統</h1>
+          <RaisedButton label="D2 登入" secondary={true} href={`${this.context.config.SERVER_HOST}/d2login/`} />
         </div>
       </div>
     );
