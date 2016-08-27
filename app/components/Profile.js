@@ -43,7 +43,6 @@ const strings = {
 const editorStyle = {
   maxWidth: 600,
   margin: '50px auto',
-  paddingBottom: 25
 };
 
 const viewerStyle = {
@@ -236,7 +235,7 @@ class ProfileEditor extends React.Component {
         <div>
           { textFields }
           <Divider />
-          <div style={{ textAlign: 'center', marginTop: 20 }}>
+          <div style={{ textAlign: 'center', padding: '20px 0' }}>
             <RaisedButton secondary={true} label="儲存" onTouchTap={this.submit} />
           </div>
         </div>
@@ -287,6 +286,14 @@ const ProfileViewer = (props, context) => {
       <List>
         { profileList }
       </List>
+      {
+        this.props.myinfo ?
+          <Divider />
+          <div style={{ textAlign: 'center', padding: '20px 0' }}>
+            <RaisedButton secondary={true} label="編輯" containerElement={<Link to="/user/myinfo/modify" />} />
+          </div> :
+        null
+      }
     </ProgressPaper>
    )
 };
