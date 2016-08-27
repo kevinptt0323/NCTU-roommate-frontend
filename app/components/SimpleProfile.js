@@ -39,6 +39,7 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
   if (room) {
     roomString = buildings.data.find(({building_id}) => building_id==room.building_id).building_name + ' ' + room.room_name;
   }
+  facebook_id = facebook_id ? `//fb.com/${facebook_id}` : '';
   const gridStyle = {
     flex: 1,
     width: '50%',
@@ -65,7 +66,9 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <div style={gridStyle}><FaceIcon style={iconStyle} />{student_id}</div>
-          <div style={gridStyle}><FacebookIcon style={iconStyle} />fb.com/{facebook_id}</div>
+          <div style={gridStyle}><FacebookIcon style={iconStyle} />{
+            !!facebook_id ? <a href={facebook_id} target="_blank">連結</a> : null
+          }</div>
         </div>
         <Divider />
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
