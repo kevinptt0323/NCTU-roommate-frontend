@@ -19,7 +19,7 @@ const navStyle = {
   width: '100vw'
 };
 
-const navHref = ["/search", "/user/myinfo"];
+const navHref = ["/search", "/user/myinfo", "/privacy", "/contact"];
 
 const BottomNav = (props, context) => {
   const { location } = context;
@@ -38,6 +38,18 @@ const BottomNav = (props, context) => {
           containerElement={<Link to={navHref[1]} />}
           style={centeredText}
         />
+        <BottomNavigationItem
+          label="隱私權條款"
+          icon={personIcon}
+          containerElement={<Link to={navHref[2]} />}
+          style={centeredText}
+        />
+        <BottomNavigationItem
+          label="聯絡我們"
+          icon={personIcon}
+          containerElement={<Link to={navHref[3]} />}
+          style={centeredText}
+        />
       </BottomNavigation>
     </Paper>
   );
@@ -48,5 +60,3 @@ BottomNav.contextTypes = {
 };
 
 export default BottomNav;
-
-

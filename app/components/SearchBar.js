@@ -83,10 +83,10 @@ class SearchBar extends React.Component {
         break;
       case 'class_id':
       case 'student_name':
-        input2Hint = '謝小恩 (姓名)';
+        input2Hint = '王小明 (姓名)';
         break;
       case 'other':
-        input2Hint = this.state.input2 == 'student_id' ? '0516000' : 'your_email@nctu.edu.tw'
+        input2Hint = this.state.input2 == 'student_id' ? 'EX: 0516000' : 'EX: your_email@nctu.edu.tw'
     }
     this.menus.building_id = buildings.data.map(buildings2JSX);
     this.menus.class_id = classes.data.map(classes2JSX);

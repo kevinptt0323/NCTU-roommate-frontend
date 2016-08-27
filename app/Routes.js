@@ -7,6 +7,8 @@ import App from './App';
 import Index from './pages/Index';
 import Login from './pages/Login';
 import Search from './pages/Search';
+import Privacy from './pages/Privacy';
+import Contact from './pages/Contact';
 import Profile from './pages/Profile';
 import { EditButton } from './components/Profile';
 
@@ -29,6 +31,8 @@ const Routes = (props, context) => {
       <Route path="/" component={App}>
         <IndexRedirect to="/search" />
         <Route path="login" component={Login} />
+        <Route path="privacy" component={Privacy} />
+        <Route path="contact" component={Contact} />
         <Route path="search" component={Search} onEnter={auth.loginRequired} />
         <Route path="user">
           <Route path="info/:uid" component={Profile.View} onEnter={auth.loginRequired} />
@@ -50,5 +54,3 @@ Routes.contextTypes = {
 };
 
 export default Routes;
-
-

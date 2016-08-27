@@ -122,8 +122,8 @@ class App extends React.Component {
         <div style={{width: '100vw', height: '100vh', position: 'absolute'}}>
           <AppBar
             onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap}
-            style={{ position: 'fixed', top: 0 }}
-            title="Hello, world!"
+            style={{ position: 'fixed', top: 0, backgroundColor: '#000000'}}
+            title="交大 找小豬 平台"
             iconElementRight={this.props.appbarElementRight}
           />
           <LeftNav ref="leftNav" />
