@@ -19,6 +19,11 @@ const profileReducer = (state = initialState, action) => {
         data: [],
         error: action.response,
       };
+    case 'CLEAN_SEARCH':
+      return {
+        ...state,
+        data: [],
+      };
     default:
       return state;
   }

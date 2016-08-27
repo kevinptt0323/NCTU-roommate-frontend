@@ -15,6 +15,11 @@ class Search extends React.Component {
   constructor(...args) {
     super(...args);
   }
+  componentWillUnmount() {
+    this.context.store.dispatch({
+      type: 'CLEAN_SEARCH'
+    });
+  }
   render() {
     const searchResultJSX = this.context.search.data.map(profile => (
       <SimpleProfile key={`user-${profile.uid}`} data={profile} style={{margin: '20px 0'}} />
