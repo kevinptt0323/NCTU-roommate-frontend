@@ -8,7 +8,7 @@ import { push } from 'react-router-redux';
 import { AppBar } from 'material-ui';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { indigo500 } from 'material-ui/styles/colors';
+import { grey800 } from 'material-ui/styles/colors';
 
 /* custom components */
 import LeftNav from './components/LeftNav';
@@ -20,7 +20,7 @@ import * as actions from './actions';
 
 const muiTheme = getMuiTheme({
   palette: {
-    primary1Color: indigo500,
+    primary1Color: grey800,
   },
 });
 
@@ -122,7 +122,7 @@ class App extends React.Component {
         <div style={{width: '100vw', height: '100vh', position: 'absolute'}}>
           <AppBar
             onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap}
-            style={{ position: 'fixed', top: 0, backgroundColor: '#000000'}}
+            style={{ position: 'fixed', top: 0 }}
             title="交大 找小豬 平台"
             iconElementRight={this.props.appbarElementRight}
           />
