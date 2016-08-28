@@ -249,7 +249,7 @@ class ProfileEditor extends React.Component {
           { textFields }
           <Divider />
           <div style={{ padding: 20 }}>
-            <Checkbox checked={this.state.agree} onCheck={this.handleCheck} label="我已閱讀並同意隱私權條款" />
+            <Checkbox checked={this.state.agree} onCheck={this.handleCheck} label="我已閱讀並同意隱私權條款，且上方資料並無造假。" />
           </div>
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
             <FlatButton primary={true} label="閱讀隱私權條款" onTouchTap={this.togglePrivacyDialog} />
