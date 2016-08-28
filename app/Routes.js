@@ -12,6 +12,12 @@ import Contact from './pages/Contact';
 import Profile from './pages/Profile';
 import { EditButton } from './components/Profile';
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-65410860-4');
+function fireTracking() {
+    ReactGA.pageview(window.location.hash.split('?')[0]);
+}
+
 require('react-tap-event-plugin')();
 require('normalize-css');
 
@@ -27,7 +33,7 @@ const Routes = (props, context) => {
     }
   };
   return (
-    <Router history={historyStore} render={applyRouterMiddleware(useScroll())}>
+    <Router onUpdate={fireTracking} history={historyStore} render={applyRouterMiddleware(useScroll())}>
       <Route path="/" component={App}>
         <IndexRedirect to="/search" />
         <Route path="login" component={Login} />
