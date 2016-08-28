@@ -35,7 +35,7 @@ const Routes = (props, context) => {
   return (
     <Router onUpdate={fireTracking} history={historyStore} render={applyRouterMiddleware(useScroll())}>
       <Route path="/" component={App}>
-        <IndexRedirect to="/search" />
+        <IndexRedirect to="/user/myinfo" />
         <Route path="login" component={Login} />
         <Route path="privacy" component={Privacy} />
         <Route path="contact" component={Contact} />
