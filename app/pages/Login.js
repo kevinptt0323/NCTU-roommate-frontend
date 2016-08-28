@@ -38,8 +38,9 @@ class Login extends React.Component {
             display: 'inline-block'
           }}
         >
-          <h1 style={{ fontSize: '4em' }}>交大新生</h1>
-          <h1 style={{ fontSize: '4em' }}>找小豬系統</h1>
+          <div style={{ width: '70%', minWidth: '300px', margin: '20px auto' }}>
+            <img style={{ width: '100%' }} src="https://roommate.twmicrosheep.com/static/2pig_bg.png" alt="交大新生找小豬系統" />
+          </div>
           <RaisedButton label="登入 / Login" secondary={true} href={`${this.context.config.SERVER_HOST}/d2login/`} />
         </div>
       </div>
