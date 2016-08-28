@@ -3,8 +3,10 @@ import { Link } from 'react-router';
 import update from 'react-addons-update';
 import { push } from 'react-router-redux';
 import {
+  Checkbox,
   RaisedButton,
   Divider,
+  Dialog,
   FlatButton,
   List, ListItem,
   SelectField,
@@ -19,6 +21,7 @@ import deepEqual from 'deep-equal';
 
 import { sendAjax } from '../actions/api';
 import ProgressPaper from './ProgressPaper';
+import Privacy from '../pages/Privacy';
 
 const formDataKeys = ['student_name', 'student_nickname', 'class_id', 'student_id', 'room_id', 'email', 'facebook_id', 'slogan', 'detail'];
 
@@ -56,7 +59,7 @@ const buildings2JSX = ({building_id, building_name}) => (<MenuItem key={`buildin
 class ProfileEditor extends React.Component {
   constructor(props, context) {
     super(props);
-    this.state = { formData: {}, errorText: {}, modified: false };
+    this.state = { formData: {}, errorText: {}, modified: false, agree: false, open: false };
 
     this.classMenu = context.classes.data.map(classes2JSX);
     this.buildingMenu = context.buildings.data.map(buildings2JSX);
@@ -64,6 +67,8 @@ class ProfileEditor extends React.Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.submit = this.submit.bind(this);
+    this.togglePrivacyDialog = this.togglePrivacyDialog.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
 
     this.textInputProps = {
       onChange: this.handleTextChange,
@@ -119,6 +124,12 @@ class ProfileEditor extends React.Component {
       })
     });
   }
+  togglePrivacyDialog() {
+    this.setState({ open: !this.state.open });
+  }
+  handleCheck(e, value) {
+    this.setState({ agree: value });
+  }
   handleTextChange(e) {
     const { name: key, value } = e.target;
     let formData = this.state.formData;
@@ -146,11 +157,13 @@ class ProfileEditor extends React.Component {
     this.setState({ formData, modified: true }, () => this.validate(key));
   }
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    const { formData, errorText } = this.state;
-    const { formData: formData2, errorText: errorText2 } = nextState;
+    const { formData, errorText, open, agree } = this.state;
+    const { formData: formData2, errorText: errorText2, open: open2, agree: agree2 } = nextState;
     return !deepEqual(formData, formData2)
         || !deepEqual(errorText, errorText2)
-        || this.context.profile.sending != nextContext.profile.sending;
+        || this.context.profile.sending != nextContext.profile.sending
+        || open != open2
+        || agree != agree2;
   }
   render() {
     const { profile } = this.context;
@@ -235,10 +248,17 @@ class ProfileEditor extends React.Component {
         <div>
           { textFields }
           <Divider />
+          <div style={{ padding: 20 }}>
+            <Checkbox checked={this.state.agree} onCheck={this.handleCheck} label="我已閱讀並同意隱私權條款" />
+          </div>
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <RaisedButton secondary={true} label="儲存" onTouchTap={this.submit} />
+            <FlatButton primary={true} label="閱讀隱私權條款" onTouchTap={this.togglePrivacyDialog} />
+            <RaisedButton disabled={!this.state.agree || profile.sending} secondary={true} label="儲存" onTouchTap={this.submit} />
           </div>
         </div>
+        <Dialog open={this.state.open} autoScrollBodyContent={true} onRequestClose={this.togglePrivacyDialog}>
+          <Privacy />
+        </Dialog>
       </ProgressPaper>
     );
   }
