@@ -41,7 +41,7 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
   if (building_id) {
     roomString = buildings.data.find(({building_id: _building_id}) => _building_id==building_id).building_name + ' ' + room_name;
   }
-  let facebook_url = facebook_id ? `//fb.com/${facebook_url}` : '';
+  let facebook_url = facebook_id ? `//fb.com/${facebook_id}` : '';
   const gridStyle = {
     flex: 1,
     width: '50%',
