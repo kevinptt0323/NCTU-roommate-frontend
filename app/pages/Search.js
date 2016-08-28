@@ -36,7 +36,8 @@ class Search extends React.Component {
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', padding: '50px 0' }}>
           <Paper style={{ display: 'inline-block', padding: 20 }}>
             <h5>請先至下方 個人頁面 填寫個人資料！謝謝！</h5>
-            <h5>查詢宿舍請到 <a href="http://dormapply2.adm.nctu.edu.tw/freshman_query/">住服組查詢系統</a></h5>
+            <h5>查詢自己的宿舍請到</h5>
+            <a href='http://dormapply2.adm.nctu.edu.tw/freshman_query/'>住服組查詢系統</a>  
             <SearchBar />
           </Paper>
         </div>
