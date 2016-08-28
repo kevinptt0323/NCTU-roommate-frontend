@@ -41,7 +41,7 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
   if (building_id) {
     roomString = buildings.data.find(({building_id: _building_id}) => _building_id==building_id).building_name + ' ' + room_name;
   }
-  facebook_id = facebook_id ? `//fb.com/${facebook_id}` : '';
+  let facebook_url = facebook_id ? `//fb.com/${facebook_url}` : '';
   const gridStyle = {
     flex: 1,
     width: '50%',
@@ -57,7 +57,10 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
       <CardHeader
         title={student_name}
         subtitle={student_nickname}
-        avatar={<Avatar>{student_name[0]}</Avatar>}
+        avatar={!!facebook_id ?
+          <Avatar src={`http://graph.facebook.com/v2.7/${facebook_id}/picture`} alt={student_name[0]} /> :
+          <Avatar>{student_name[0].toUpperCase()}</Avatar>
+        }
       />
       <Divider />
       <CardText>
@@ -69,7 +72,7 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <div style={gridStyle}><FaceIcon style={iconStyle} />{student_id}</div>
           <div style={gridStyle}><FacebookIcon style={iconStyle} />{
-            !!facebook_id ? <a href={facebook_id} target="_blank">我的 FB 連結</a> : null
+            !!facebook_url ? <a href={facebook_url} target="_blank">我的 FB 連結</a> : null
           }</div>
         </div>
         <Divider />
