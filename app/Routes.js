@@ -4,7 +4,6 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import { useScroll } from 'react-router-scroll';
 
 import App from './App';
-import Index from './pages/Index';
 import Login from './pages/Login';
 import Search from './pages/Search';
 import Privacy from './pages/Privacy';

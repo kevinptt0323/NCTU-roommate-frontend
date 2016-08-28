@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Paper } from 'material-ui';
+import Paper from 'material-ui/Paper';
 
 const Contact = props => (
   <Paper style={{ padding: 20 }}>

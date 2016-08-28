@@ -4,10 +4,6 @@ import { Link } from 'react-router';
 import Avatar from 'material-ui/Avatar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
-import FlatButton from 'material-ui/FlatButton';
-import Paper from 'material-ui/Paper';
-import SvgIcon from 'material-ui/SvgIcon';
-import { GridTile } from 'material-ui/GridList';
 
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import SchoolIcon from 'material-ui/svg-icons/social/school';

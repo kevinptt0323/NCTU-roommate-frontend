@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Paper, RaisedButton } from 'material-ui';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Login extends React.Component {
   constructor(props, context) {

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-import { Paper, Tabs, Tab, RaisedButton } from 'material-ui';
+import Paper from 'material-ui/Paper';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import PersonIcon from 'material-ui/svg-icons/social/person';
