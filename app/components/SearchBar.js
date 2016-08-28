@@ -95,6 +95,7 @@ class SearchBar extends React.Component {
         <SelectField
           value={this.state.input1}
           onChange={this.changeSelect1}
+          maxHeight={200}
           style={{ verticalAlign: 'top', margin: '0 5px', textAlign: 'left' }}
           hintText="找室友"
         >
@@ -108,6 +109,7 @@ class SearchBar extends React.Component {
             <SelectField
               value={this.state.input2}
               onChange={this.changeSelect2}
+              maxHeight={200}
               style={{ verticalAlign: 'top', margin: '0 5px', textAlign: 'left' }}
             >
               { this.menus[this.state.input1] }

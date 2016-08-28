@@ -45,15 +45,15 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
   const gridStyle = {
     flex: 1,
     width: '50%',
-    minWidth: 300,
-    margin: '10px 0'
+    margin: '10px 0',
+    wordBreak: 'break-all'
   };
   const iconStyle = {
     marginRight: 10,
     verticalAlign: 'middle'
   };
   return (
-    <Card style={props.style}>
+    <Card style={props.style} className="ui-card">
       <CardHeader
         title={student_name}
         subtitle={student_nickname}
@@ -63,7 +63,7 @@ const SimpleProfile = ({data: profile, ...props}, {classes, buildings, ...contex
         }
       />
       <Divider />
-      <CardText>
+      <CardText className="ui-cardText">
         <div style={gridStyle}><HomeIcon style={iconStyle} />{roomString}</div>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <div style={gridStyle}><SchoolIcon style={iconStyle} />{classString}</div>
