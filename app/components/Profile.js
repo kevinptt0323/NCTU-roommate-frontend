@@ -180,7 +180,8 @@ class ProfileEditor extends React.Component {
           value: formData[key],
           errorText: errorText[key],
           name: key,
-          floatingLabelText: strings.profile[key]
+          floatingLabelText: key == 'facebook_id' ? 'Facebook ID' : strings.profile[key],
+          hintText: strings.profile[key]
         };
         switch (key) {
           case 'class_id':
@@ -232,7 +233,7 @@ class ProfileEditor extends React.Component {
               disabled={key=='student_name'}
               toggled={toggled}
               style={{ position: 'absolute', right: 20, width: 'initial' }}
-              label={toggled ? "公開" : "不公開"}
+              label={toggled ? "公開" : "隱藏"}
               onToggle={this.handleToggle}
               name={`${key}_enable`}
             />
