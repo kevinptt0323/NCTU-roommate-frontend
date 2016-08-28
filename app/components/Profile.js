@@ -245,7 +245,7 @@ class ProfileEditor extends React.Component {
         !!prev ? [...prev, <Divider key={`divider-${index}`} />, curr] : [curr]
       ), null);
     return (
-      <ProgressPaper style={{...editorStyle, ...this.props.style}} loading={profile.sending}>
+      <ProgressPaper className={this.props.className} style={{...editorStyle, ...this.props.style}} loading={profile.sending}>
         <div>
           { textFields }
           <Divider />
@@ -303,7 +303,7 @@ const ProfileViewer = (props, context) => {
       !!prev ? [...prev, <Divider key={`divider-${index}`} />, curr] : [curr]
     ), null);
   return (
-    <ProgressPaper style={{...viewerStyle, ...props.style}}>
+    <ProgressPaper className={props.className} style={{...viewerStyle, ...props.style}}>
       <List>
         { profileList }
       </List>

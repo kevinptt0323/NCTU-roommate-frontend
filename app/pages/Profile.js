@@ -8,9 +8,8 @@ const View = ({myinfo, ...props}, {profile, currProfile, ...context}) => (
     backgroundImage: 'url(https://roommate.twmicrosheep.com/static/landing_background.png)',
     backgroundAttachment: 'fixed',
     backgroundSize: 'cover',
-    paddingTop: 50
   }}>
-    <ProfileViewer myinfo={true} profile={myinfo ? profile.data : {}} />
+    <ProfileViewer className="css-paddingTop" myinfo={true} profile={myinfo ? profile.data : {}} />
   </div>
 );
 View.contextTypes = {
@@ -25,9 +24,8 @@ const Edit = (props) => (
     backgroundAttachment: 'fixed',
     backgroundSize: 'cover',
     paddingTop: 50,
-    paddingBottom: 50
   }}>
-    <ProfileEditor />
+    <ProfileEditor className="css-paddingTop" />
   </div>
 );
 
