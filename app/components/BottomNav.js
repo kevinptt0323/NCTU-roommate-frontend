@@ -10,7 +10,7 @@ import ForumIcon from 'material-ui/svg-icons/communication/forum';
 
 /* style quick fix for material-ui pr #4982 */
 const centeredIcon = { width: '100%' };
-const centeredText = { textAlign: 'center' };
+const centeredText = { textAlign: 'center', whiteSpace: 'nowrap' };
 
 const navStyle = {
   position: 'fixed',
