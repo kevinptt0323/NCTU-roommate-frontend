@@ -36,8 +36,6 @@ class Search extends React.Component {
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', padding: '50px 0' }}>
           <Paper style={{ display: 'inline-block', padding: 20 }}>
             <h5>請先至下方 個人頁面 填寫個人資料！謝謝！</h5>
-          </Paper><br/>
-          <Paper style={{ display: 'inline-block', padding: 20 }}>
             <SearchBar />
           </Paper>
         </div>
